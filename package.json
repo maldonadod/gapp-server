@@ -1,0 +1,16 @@
+{
+  "name": "gapp",
+  "version": "0.0.1",
+  "description": "GApp server",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/maldonadod/gapp-server.git"
+  },
+  "author": "maldonadod",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/maldonadod/gapp-server#readme"
+}
