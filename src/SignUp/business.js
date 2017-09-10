@@ -1,11 +1,21 @@
-const register = data => {
+const User = require('../../models/User')
 
-  const {
-    username
+const register = ({
+  email
+  ,password
+}) => {
+
+  const user = {
+    email
     ,password
-  } = data
+  }
 
-  return Promise.resolve(data)
+  return new User(user)
+  .save()
+  .then(res => {
+    user.token = res._id
+    return user
+  })
 }
 
 module.exports = {
