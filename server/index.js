@@ -8,7 +8,7 @@ app.use(bodyParser.json({extended: true}))
 
 const SignUp = require('../src/SignUp')
 
-const PORT = process.env.PORT || 9052
+const PORT = process.env.GAPP_PORT || 9052
 
 app.get('/', (req, res) => {
   res.send('Gapp')
