@@ -2,6 +2,7 @@ const express = require('express')
 
 const app = express()
 const bodyParser = require('body-parser')
+const db = require('../db')
 
 app.use(bodyParser.json({extended: true}))
 
