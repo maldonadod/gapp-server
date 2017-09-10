@@ -6,7 +6,8 @@ module.exports = {
     SignUpBusiness.register(req.body)
     .then(user => {
       res.send({
-        status: 'OK'
+        status: 'OK',
+        data: user
       })
     })
     .catch(err => {
