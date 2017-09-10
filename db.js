@@ -1,6 +1,9 @@
 var mongoose = require('mongoose')
-const DB_NAME = process.env.DB_NAME || 'test'
+const DB_URL = process.env.DB_URL || 'mongodb://127.0.0.1/test'
 
-mongoose.connect(`mongodb://localhost/${DB_NAME}`, {
+mongoose.Promise = global.Promise;
+
+mongoose.connect(DB_URL, {
   useMongoClient: true
-});
+})
+.catch(err => console.log(err));
