@@ -4,6 +4,7 @@
   "description": "GApp server",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
     "test": "jest"
   },
   "repository": {
@@ -12,5 +13,9 @@
   },
   "author": "maldonadod",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/maldonadod/gapp-server#readme"
+  "homepage": "https://bitbucket.org/maldonadod/gapp-server#readme",
+  "dependencies": {
+    "body-parser": "^1.18.0",
+    "express": "^4.15.4"
+  }
 }
