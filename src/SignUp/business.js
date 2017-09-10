@@ -5,16 +5,27 @@ const register = ({
   ,password
 }) => {
 
-  const user = {
+  return User.findOne({
     email
-    ,password
-  }
+  })
+  .then(exists => {
 
-  return new User(user)
-  .save()
-  .then(res => {
-    user.token = res._id
-    return user
+    if (!exists) {
+
+      const user = {
+        email
+        ,password
+      }
+
+      return new User(user)
+      .save()
+      .then(res => {
+        user.token = res._id
+        return user
+      })
+    } else {
+      return Promise.reject('Email currently in use')
+    }
   })
 }
 
