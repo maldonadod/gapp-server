@@ -1,7 +1,8 @@
 const User = require('../../models/User')
 
 const register = ({
-  email
+  id
+  ,name
   ,access_token
 }) => {
 
@@ -10,7 +11,8 @@ const register = ({
     }
 
     const user = {
-      email
+      id
+      ,name
       ,provider
     }
 
