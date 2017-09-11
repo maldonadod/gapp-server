@@ -2,7 +2,7 @@ const User = require('../../models/User')
 
 const register = ({
   email
-  ,password
+  ,access_token
 }) => {
 
   return User.findOne({
@@ -12,9 +12,13 @@ const register = ({
 
     if (!exists) {
 
+      const provider = {
+        facebook: access_token
+      }
+
       const user = {
         email
-        ,password
+        ,provider
       }
 
       return new User(user)
