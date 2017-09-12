@@ -2,31 +2,28 @@ const User = require('../../models/User')
 
 const register = ({
   email
-  ,access_token
+  ,password
 }) => {
 
   return User.findOne({
-    email
+    'authentication.email': email
   })
   .then(exists => {
 
     if (!exists) {
 
-      const provider = {
-        facebook: access_token
-      }
+      const access_token = 'ds8da09s8d09a8s98da09s8d0a8sd098a'
 
       const user = {
-        email
-        ,provider
+        password,
+        authentication: {
+          email,
+          access_token
+        }
       }
 
       return new User(user)
-      .save()
-      .then(res => {
-        user.token = res._id
-        return user
-      })
+        .save()
     } else {
       return Promise.reject('Email currently in use')
     }

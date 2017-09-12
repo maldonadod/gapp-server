@@ -2,27 +2,20 @@ const User = require('../../models/User');
 
 const login = ({
   email
-  ,access_token
+  ,password
 }) => {
 
   return User.findOne({
-    email
+    'authentication.email': email
+    ,password
   })
   .then(user => {
 
     if (user === null) {
-      return Promise.reject('Dont know that email')
+      return Promise.reject('Invalid')
     }
 
-    return user.updateAccessTokenProvider(access_token)
-      .then(user => {
-        const {email, provider} = user
-        return {
-          email
-          ,provider
-          ,token: user._id
-        }
-      })
+    return user
   })
 }
 
