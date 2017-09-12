@@ -11,7 +11,7 @@ const User = new Schema({
   },
   profile_picture: String
 }, {
-  collection: 'User'
+  collection: 'Users'
 })
 
 module.exports = mongoose.model('User', User)
