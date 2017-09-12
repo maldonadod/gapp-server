@@ -27,6 +27,7 @@ const register = ({
     } else {
       return Promise.reject('Email currently in use')
     }
+  })
 }
 
 module.exports = {
