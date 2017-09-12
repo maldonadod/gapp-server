@@ -6,8 +6,8 @@ const db = require('../db')
 
 app.use(bodyParser.json({extended: true}))
 
-const SignUp = require('../src/SignUp')
-const LogIn = require('../src/LogIn')
+const Sign = require('../src/SignUp')
+const Login = require('../src/LogIn')
 
 const PORT = process.env.PORT || 9052
 
@@ -15,9 +15,8 @@ app.get('/', (req, res) => {
   res.send('Gapp')
 });
 
-app.post('/signup', SignUp.post);
-
-app.post('/login', LogIn.post);
+app.post('/signup', Sign.post);
+app.post('/login', Login.post);
 
 app.listen(PORT, function() {
   console.log(`Listening at ${PORT}`)
