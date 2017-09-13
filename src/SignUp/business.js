@@ -12,13 +12,11 @@ const register = ({
 
     if (!exists) {
 
-      const access_token = 'ds8da09s8d09a8s98da09s8d0a8sd098a'
-
       const user = {
         password,
         authentication: {
           email,
-          access_token
+          access_token: null
         }
       }
 
