@@ -38,7 +38,7 @@ const getOne = (params = {}) => {
 const post = input => {
   const chapter = new Chapter(input)
 
-  chapter.setMessages(input.messages)
+  //chapter.setMessages(input.messages)
   chapter.setGuests(input.guests)
 
   return chapter.save().then(() => {
