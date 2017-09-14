@@ -2,21 +2,21 @@ const {
   Chapter
 } = require('../../models/Chapter')
 
-const user_unselected_fields = '-__v -authentication.access_token -password'
+const User = require('../../models/User')
 
 const author = {
   path: 'author',
-  select: user_unselected_fields
+  select: User.USER_UNSELECTED_FIELDS
 }
 
 const guests = {
   path: 'guests.user',
-  select: user_unselected_fields
+  select: User.USER_UNSELECTED_FIELDS
 }
 
 const message_author = {
   path: 'messages.author',
-  select: user_unselected_fields
+  select: User.USER_UNSELECTED_FIELDS
 }
 
 const unselected_fields = '-__v'

@@ -12,6 +12,7 @@ app.use(bodyParser.json({extended: true}))
 const Sign = require('../src/SignUp')
 const Login = require('../src/LogIn')
 const Chapters = require('../src/Chapters')
+const Users = require('../src/Users')
 
 const UserProfile = require('../src/UserProfile')
 
@@ -38,6 +39,7 @@ app.post('/login', Login.post);
 app.get('/profile/me', UserProfile.get)
 app.get('/events', Chapters.get)
 app.post('/events', Chapters.post)
+app.get('/users', Users.get)
 
 app.listen(PORT, function() {
   console.log(`Listening at ${PORT}`)

@@ -14,4 +14,6 @@ const User = new Schema({
   collection: 'Users'
 })
 
+User.statics.USER_UNSELECTED_FIELDS = '-__v -authentication.access_token -password'
+
 module.exports = mongoose.model('User', User)
