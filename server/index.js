@@ -37,7 +37,7 @@ app.post('/login', Login.post);
 
 //AUTHORIZATION REQUIRED
 app.get('/profile/me', UserProfile.get)
-app.get('/events', Chapters.get)
+app.get('/events/:_id?', Chapters.get)
 app.post('/events', Chapters.post)
 app.get('/users', Users.get)
 
