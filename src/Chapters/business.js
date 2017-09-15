@@ -59,5 +59,6 @@ const post = input => {
 module.exports = {
   get
   ,post
+  ,getOne
   ,paginate
 }

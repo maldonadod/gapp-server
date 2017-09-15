@@ -6,12 +6,16 @@ const get = (req, res) => {
   const {_id} = req.params
   const paginateOptions = PaginationBusiness.getOptions(req.query)
   const params = {}
+  let promise;
 
   if (_id) {
     params._id = _id
+    promise = ChapterBusiness.getOne(params)
+  } else {
+    promise = ChapterBusiness.paginate(params, paginateOptions)
   }
 
-  ChapterBusiness.paginate(params, paginateOptions)
+  promise
   .then(chapters => {
     res.send({
       status: 'OK',
