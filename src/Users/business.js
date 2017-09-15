@@ -1,7 +1,7 @@
 const User = require('../../models/User')
 
-const get = () => {
-  return User.find({}, User.USER_UNSELECTED_FIELDS)
+const get = params => {
+  return User.find(params, User.USER_UNSELECTED_FIELDS)
 }
 
 module.exports = {
