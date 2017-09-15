@@ -27,16 +27,16 @@ const HomeHandler = (req, res) => {
 app.use(jwte({secret: AUTH_TOKEN_SAUCE}).unless({path: ['/login', '/signup', '/']}))
 
 app.use((req, res, next) => {
-
+  if (!req.user) { return next() }
   User.findOne({
     _id: req.user._id
-  })
+  }, '-__v')
   .then(user => {
     if (!user) {
       return next('User not found')
     }
-    req.user = Object.assign({}, req.user, user.toJSON())
-    next()
+    req.loggedInUser = Object.assign({}, user.toJSON())
+    return next()
   })
 })
 
