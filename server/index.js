@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const db = require('../db')
+const User = require('../models/User')
 var jwte = require('express-jwt')
 const {
   AUTH_TOKEN_SAUCE
@@ -24,6 +25,20 @@ const HomeHandler = (req, res) => {
 }
 
 app.use(jwte({secret: AUTH_TOKEN_SAUCE}).unless({path: ['/login', '/signup', '/']}))
+
+app.use((req, res, next) => {
+
+  User.findOne({
+    _id: req.user._id
+  })
+  .then(user => {
+    if (!user) {
+      return next('User not found')
+    }
+    req.user = Object.assign({}, req.user, user.toJSON())
+    next()
+  })
+})
 
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
