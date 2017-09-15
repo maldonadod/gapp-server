@@ -1,11 +1,13 @@
 const GuestsBusiness = require('./business')
 const UsersBusiness = require('../Users/business')
+const PaginationBusiness = require('../Pagination/business')
 const Utils = require('../../models/utils')
 
 const get = (req, res) => {
 
   const {_id} = req.user
   const {name} = req.query
+  const paginationOptions = PaginationBusiness.getOptions(req.query)
   let params = {}
 
   let defaultParams = {
@@ -20,7 +22,7 @@ const get = (req, res) => {
 
   params = Utils.mergeQueries([defaultParams, params])
 
-  GuestsBusiness.get(params)
+  GuestsBusiness.getPaginate(params, paginationOptions)
   .then(guests => res.send({
     status: 'OK',
     data: guests

@@ -19,13 +19,21 @@ const message_author = {
   select: User.USER_UNSELECTED_FIELDS
 }
 
-const unselected_fields = '-__v'
+const unselected_fields = '-__v -messages'
 
 const get = (params = {}) => {
   return Chapter.find(params, unselected_fields)
   .populate(author)
   .populate(message_author)
   .populate(guests)
+}
+
+const paginate = (params,paginationOptions) => {
+  paginationOptions.populate = [
+    author, message_author, guests
+  ]
+  paginationOptions.select = unselected_fields
+  return Chapter.paginate(params, paginationOptions)
 }
 
 const getOne = (params = {}) => {
@@ -51,4 +59,5 @@ const post = input => {
 module.exports = {
   get
   ,post
+  ,paginate
 }

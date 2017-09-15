@@ -1,16 +1,17 @@
 const ChapterBusiness = require('./business');
+const PaginationBusiness = require('../Pagination/business');
 
 const get = (req, res) => {
 
   const {_id} = req.params
-
+  const paginateOptions = PaginationBusiness.getOptions(req.query)
   const params = {}
 
   if (_id) {
     params._id = _id
   }
 
-  ChapterBusiness.get(params)
+  ChapterBusiness.paginate(params, paginateOptions)
   .then(chapters => {
     res.send({
       status: 'OK',
