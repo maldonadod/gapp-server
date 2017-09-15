@@ -4,8 +4,10 @@ const get = (req, res) => {
 
   const {_id} = req.params
 
-  const params = {
-    _id
+  const params = {}
+
+  if (_id) {
+    params._id = _id
   }
 
   ChapterBusiness.get(params)
