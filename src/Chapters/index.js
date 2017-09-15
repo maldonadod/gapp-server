@@ -2,7 +2,11 @@ const ChapterBusiness = require('./business');
 
 const get = (req, res) => {
 
-  const params = {}
+  const {_id} = req.params
+
+  const params = {
+    _id
+  }
 
   ChapterBusiness.get(params)
   .then(chapters => {
