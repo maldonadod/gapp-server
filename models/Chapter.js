@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const User = require('./User')
+const mongoosePaginate = require('mongoose-paginate')
 
 const MessageSchema = new Schema({
   text: String,
@@ -53,6 +54,8 @@ const Fac = Model => (function(Model) {
     return this
   }
 })(Model)
+
+ChapterSchema.plugin(mongoosePaginate)
 
 const Message = mongoose.model('Message', MessageSchema)
 const Guest = mongoose.model('Guest', GuestSchema)
