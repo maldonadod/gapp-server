@@ -13,6 +13,7 @@ const Sign = require('../src/SignUp')
 const Login = require('../src/LogIn')
 const Chapters = require('../src/Chapters')
 const Users = require('../src/Users')
+const Guests = require('../src/Guests')
 
 const UserProfile = require('../src/UserProfile')
 
@@ -28,6 +29,10 @@ app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('invalid token');
   }
+  if (err) {
+    console.log(err)
+    res.status(400).send('bad request')
+  }
 });
 
 app.get('/', HomeHandler)
@@ -40,6 +45,8 @@ app.get('/profile/me', UserProfile.get)
 app.get('/events/:_id?', Chapters.get)
 app.post('/events', Chapters.post)
 app.get('/users', Users.get)
+
+app.get('/guests', Guests.get)
 
 app.listen(PORT, function() {
   console.log(`Listening at ${PORT}`)
