@@ -2,7 +2,10 @@ const User = require('../../models/User')
 
 const register = ({
   email
+  ,first_name
+  ,last_name
   ,password
+  ,profile_picture = ""
 }) => {
 
   return User.findOne({
@@ -13,7 +16,11 @@ const register = ({
     if (!exists) {
 
       const user = {
+        email,
+        first_name,
+        last_name,
         password,
+        profile_picture,
         authentication: {
           email,
           access_token: null
