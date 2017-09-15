@@ -3,6 +3,10 @@ const Schema = mongoose.Schema
 const User = require('./User')
 const mongoosePaginate = require('mongoose-paginate')
 
+const GUESTS_PENDING_STATUS = 'pending'
+const GUESTS_OK_STATUS = 'ok'
+const GUESTS_NOT_STATUS = 'not'
+
 const MessageSchema = new Schema({
   text: String,
   created_at: {
@@ -18,7 +22,7 @@ const MessageSchema = new Schema({
 const GuestSchema = new Schema({
   status: {
     type: String,
-    enum: ['go', 'pending', 'no'],
+    enum: [GUESTS_OK_STATUS, GUESTS_PENDING_STATUS, GUESTS_NOT_STATUS],
     default: 'pending'
   },
   user: {
@@ -68,4 +72,7 @@ const Chapter = mongoose.model('Chapter', ChapterSchema)
 module.exports = {
   Chapter
   ,Message
+  ,GUESTS_OK_STATUS
+  ,GUESTS_PENDING_STATUS
+  ,GUESTS_NOT_STATUS
 }

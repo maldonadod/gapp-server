@@ -62,6 +62,7 @@ app.post('/events', Chapters.post)
 app.get('/users', Users.get)
 
 app.get('/guests', Guests.get)
+app.put('/events/:chapter_id/guests/:guest_id', Guests.update)
 
 app.listen(PORT, function() {
   console.log(`Listening at ${PORT}`)
