@@ -14,10 +14,7 @@ module.exports = (function() {
 
   const get = (req, res) => {
 
-    UserProfileBussiness
-      .get()
-      .then(data => res.send(good(data)))
-      .catch(() => res.send(bad()))
+    res.send(good(req.loggedInUser))
   }
 
   return {

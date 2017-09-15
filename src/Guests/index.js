@@ -5,7 +5,7 @@ const Utils = require('../../models/utils')
 
 const get = (req, res) => {
 
-  const {_id} = req.user
+  const {_id} = req.loggedInUser
   const {name} = req.query
   const paginationOptions = PaginationBusiness.getOptions(req.query)
   let params = {}
