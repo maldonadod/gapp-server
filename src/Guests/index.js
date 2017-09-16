@@ -2,6 +2,7 @@ const GuestsBusiness = require('./business')
 const UsersBusiness = require('../Users/business')
 const PaginationBusiness = require('../Pagination/business')
 const Utils = require('../../models/utils')
+const ChaptersBusiness = require('../Chapters/business')
 
 const {
   GUESTS_OK_STATUS, GUESTS_PENDING_STATUS, GUESTS_NOT_STATUS
@@ -43,6 +44,17 @@ const get = (req, res) => {
   .catch(err => res.send(bad(err)))
 }
 
+const byEvent = (req, res) => {
+
+  const {chapter_id} = req.params
+
+  ChaptersBusiness.getOne({
+    _id: chapter_id
+  })
+  .then(({guests}) => res.send(good(guests)))
+  .catch(err => res.send(bad(err)))
+}
+
 const update = (req, res) => {
 
   const {
@@ -67,4 +79,5 @@ const update = (req, res) => {
 module.exports = {
   get
   ,update
+  ,byEvent
 }
