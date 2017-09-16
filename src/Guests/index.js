@@ -69,9 +69,8 @@ const update = (req, res) => {
   GuestsBusiness.update(chapter_id, guest_id, {
     status
   })
-  .then(data => res.send(good(data)))
+  .then(data => res.send(good()))
   .catch(err => {
-    console.log(err)
     res.send(bad(err))
   })
 }

@@ -13,14 +13,12 @@ const getPaginate = (params,paginationOptions) => {
 }
 
 const update = (_id, guest_id, {status}) => {
-  console.log(status)
   return Chapter.findOne({
     _id
   })
   .then(chapter => {
 
     chapter.guests = chapter.guests.map(guest => {
-      console.log(guest._id, guest_id, guest._id === guest_id)
       if (String(guest._id) === guest_id) {
         guest.status = status
       }
