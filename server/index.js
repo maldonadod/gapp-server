@@ -61,8 +61,9 @@ app.get('/events/:_id?', Chapters.get)
 app.post('/events', Chapters.post)
 app.get('/users', Users.get)
 
-app.get('/guests', Guests.get)
-app.put('/events/:chapter_id/guests/:guest_id', Guests.update)
+app.get('/users', Guests.get)
+app.get('/events/:chapter_id/guests', Guests.byEvent)
+app.patch('/events/:chapter_id/guests/:guest_id', Guests.update)
 
 app.listen(PORT, function() {
   console.log(`Listening at ${PORT}`)
