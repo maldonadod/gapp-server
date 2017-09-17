@@ -7,6 +7,7 @@ const User = new Schema({
   first_name: String,
   password: String,
   authentication: {
+    regid: String,
     email: String,
     access_token: String
   },
