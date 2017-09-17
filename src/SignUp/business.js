@@ -6,6 +6,7 @@ const register = ({
   ,last_name
   ,password
   ,profile_picture = ""
+  ,regid = ""
 }) => {
 
   return User.findOne({
@@ -23,6 +24,7 @@ const register = ({
         profile_picture,
         authentication: {
           email,
+          regid,
           access_token: null
         }
       }
