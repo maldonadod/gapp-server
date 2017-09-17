@@ -1,13 +1,16 @@
 const LogInBusiness = require('./business')
 const {
   GetUserToken
+  ,CheckPassword
 } = require('../Auth/middleware')
 
 module.exports = {
   post: (req, res) => {
+    const {password,email} = req.body
 
-    LogInBusiness.login(req.body)
+    LogInBusiness.login({password,email})
     .then(GetUserToken)
+    .then(CheckPassword.bind(null, password))
     .then(user => {
 
       res.send({
