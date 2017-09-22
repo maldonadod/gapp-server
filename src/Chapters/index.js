@@ -1,10 +1,13 @@
 const ChapterBusiness = require('./business');
-const PaginationBusiness = require('../Pagination/business');
+const {
+  getOptions
+  ,parseResponse
+} = require('../Pagination/business');
 
 const get = (req, res) => {
 
   const {_id} = req.params
-  const paginateOptions = PaginationBusiness.getOptions(req.query)
+  const paginateOptions = getOptions(req.query)
   const params = {}
   let promise;
 
@@ -17,10 +20,10 @@ const get = (req, res) => {
 
   promise
   .then(chapters => {
-    res.send({
+    res.send(parseResponse({
       status: 'OK',
       data: chapters
-    })
+    }))
   })
   .catch(err => {
     res.send({
