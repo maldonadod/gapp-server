@@ -15,7 +15,7 @@ const getOptions = defaultParams => params => parseOptions(Object.assign({}, def
 
 const parsePaging = ({limit,total,offset}) => ({limit,total,offset})
 
-const parseResponse = ({status,data}) => ({status, data: [...data.docs], paging: parsePaging(data)})
+const parseResponse = ({status,data}) => ({status, data: {results: [...data.docs], paging: parsePaging(data)}})
 
 const paginateCollection = ({limit,offset}, {status,data}) => {
 
