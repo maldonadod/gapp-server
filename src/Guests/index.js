@@ -1,6 +1,9 @@
 const GuestsBusiness = require('./business')
 const UsersBusiness = require('../Users/business')
-const PaginationBusiness = require('../Pagination/business')
+const {
+  getOptions
+  ,parseResponse
+} = require('../Pagination/business')
 const Utils = require('../../models/utils')
 const ChaptersBusiness = require('../Chapters/business')
 
@@ -24,7 +27,7 @@ const get = (req, res) => {
 
   const {_id} = req.loggedInUser
   const {name} = req.query
-  const paginationOptions = PaginationBusiness.getOptions(req.query)
+  const paginationOptions = getOptions(req.query)
   let params = {}
 
   let defaultParams = {
@@ -40,7 +43,7 @@ const get = (req, res) => {
   params = Utils.mergeQueries([defaultParams, params])
 
   GuestsBusiness.getPaginate(params, paginationOptions)
-  .then(guests => res.send(good(guests)))
+  .then(guests => res.send(parseResponse(good(guests))))
   .catch(err => res.send(bad(err)))
 }
 
