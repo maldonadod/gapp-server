@@ -7,18 +7,14 @@ const login = ({
 
   return User.findOne({
     'authentication.email': email
-    ,password
   })
   .then(user => {
-
     if (user === null) {
       return Promise.reject('Invalid')
     }
-
     return user
   })
 }
-
 
 module.exports = {
   login
