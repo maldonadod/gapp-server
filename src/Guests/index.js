@@ -3,6 +3,7 @@ const UsersBusiness = require('../Users/business')
 const {
   getOptions
   ,parseResponse
+  ,paginateCollection
 } = require('../Pagination/business')
 const Utils = require('../../models/utils')
 const ChaptersBusiness = require('../Chapters/business')
@@ -50,11 +51,12 @@ const get = (req, res) => {
 const byEvent = (req, res) => {
 
   const {chapter_id} = req.params
+  const paginationOptions = getOptions(req.query)
 
   ChaptersBusiness.getOne({
     _id: chapter_id
   })
-  .then(({guests}) => res.send(good(guests)))
+  .then(({guests}) => res.send(paginateCollection(paginationOptions, good(guests))))
   .catch(err => res.send(bad(err)))
 }
 

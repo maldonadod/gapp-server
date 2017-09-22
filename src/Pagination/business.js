@@ -17,7 +17,23 @@ const parsePaging = ({limit,total,offset}) => ({limit,total,offset})
 
 const parseResponse = ({status,data}) => ({status, data: [...data.docs], paging: parsePaging(data)})
 
+const paginateCollection = ({limit,offset}, {status,data}) => {
+
+  const docs = data.slice(offset, limit)
+
+  return parseResponse({
+    status,
+    data: {
+      docs
+      ,limit
+      ,offset
+      ,total: data.length
+    }
+  })
+}
+
 module.exports = {
   getOptions: getOptions(defaultParams)
   ,parseResponse
+  ,paginateCollection
 }
