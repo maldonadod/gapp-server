@@ -1,3 +1,7 @@
+const {
+  success
+  ,error
+} = require('../../responses');
 const ChapterBusiness = require('./business');
 const {
   getOptions
@@ -10,21 +14,22 @@ const get = (req, res) => {
   const paginateOptions = getOptions(req.query)
   const params = {}
   let promise;
-
+  let success;
   if (_id) {
     params._id = _id
     promise = ChapterBusiness.getOne(params)
+
+    success = chapter => res.send(success(chapter))
   } else {
     promise = ChapterBusiness.paginate(params, paginateOptions)
+
+    success = chapters => {
+      res.send(parseResponse(success(chapters)))
+    }
   }
 
   promise
-  .then(chapters => {
-    res.send(parseResponse({
-      status: 'OK',
-      data: chapters
-    }))
-  })
+  .then(success)
   .catch(err => {
     res.send({
       status: 'ERR',
@@ -52,7 +57,18 @@ const post = (req, res) => {
   })
 }
 
+const update = (req, res) => {
+
+  const input = req.body
+  const {_id} = req.params
+
+  ChapterBusiness.update({_id}, input)
+  .then(() => res.send(success()))
+  .catch(err => res.send(error(err)))
+}
+
 module.exports = {
   get
   ,post
+  ,update
 }

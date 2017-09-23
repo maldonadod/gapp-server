@@ -59,6 +59,7 @@ app.post('/login', Login.post);
 app.get('/profile/me', UserProfile.get)
 app.get('/events/:_id?', Chapters.get)
 app.post('/events', Chapters.post)
+app.patch('/events/:_id?', Chapters.update)
 
 app.get('/users', Guests.get)
 app.get('/events/:chapter_id/guests', Guests.byEvent)
