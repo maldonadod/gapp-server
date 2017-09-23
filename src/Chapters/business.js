@@ -56,9 +56,12 @@ const post = input => {
   })
 }
 
+const update = ({_id}, input) => Chapter.update({_id}, { $set: input })
+
 module.exports = {
   get
   ,post
   ,getOne
   ,paginate
+  ,update
 }
