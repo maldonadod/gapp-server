@@ -9,7 +9,12 @@ const get = params => {
 
 const filterByFullName = query => Utils.mergeQueries([queryByName(query)])
 
+const findOne = params => {
+  return User.findOne(params, User.USER_UNSELECTED_FIELDS)
+}
+
 module.exports = {
   get
   ,filterByFullName
+  ,findOne
 }
