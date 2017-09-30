@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const db = require('../db')
-const User = require('../models/User')
+const UserBusiness = require('../src/Users/business')
 var jwte = require('express-jwt')
 const {
   AUTH_TOKEN_SAUCE
@@ -28,9 +28,9 @@ app.use(jwte({secret: AUTH_TOKEN_SAUCE}).unless({path: ['/login', '/signup', '/'
 
 app.use((req, res, next) => {
   if (!req.user) { return next() }
-  User.findOne({
+  UserBusiness.findOne({
     _id: req.user._id
-  }, '-__v')
+  })
   .then(user => {
     if (!user) {
       return next('User not found')
@@ -57,6 +57,7 @@ app.post('/login', Login.post);
 
 //AUTHORIZATION REQUIRED
 app.get('/profile/me', UserProfile.get)
+app.get('/profile/me/events', UserProfile.getMyChapters)
 app.get('/events/:_id?', Chapters.get)
 app.post('/events', Chapters.post)
 app.patch('/events/:_id?', Chapters.update)
