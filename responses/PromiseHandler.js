@@ -14,7 +14,7 @@ const responseSuccess = formatAndResponse(success)
 const responseError = formatAndResponse(error)
 
 const handlerPromiseFactory = success => error => getPromise => (req, res) => {
-  getPromise(req)
+  return getPromise(req)
   .then(success(res))
   .catch(error(res))
 }
