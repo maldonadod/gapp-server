@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handlerPromise res should be called once on error and response model should match 1`] = `
+Object {
+  "message": Object {
+    "name": "Homer Simpson",
+  },
+  "status": "ERR",
+}
+`;
+
+exports[`handlerPromise res should be called once on success and response model should match 1`] = `
+Object {
+  "data": Object {
+    "name": "Homer Simpson",
+  },
+  "status": "OK",
+}
+`;
+
+exports[`handlerPromisePagination the response match with Pagination.parseResponse 1`] = `
+Object {
+  "data": Object {
+    "paging": Object {
+      "limit": 10,
+      "offset": 0,
+      "total": 0,
+    },
+    "results": Array [],
+  },
+  "status": "OK",
+}
+`;
