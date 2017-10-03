@@ -27,6 +27,15 @@ const HomeHandler = (req, res) => {
 app.use(jwte({secret: AUTH_TOKEN_SAUCE}).unless({path: ['/login', '/signup', '/']}))
 
 app.use((req, res, next) => {
+
+  if (req.headers['x-api-key'] !== process.env.API_KEY) {
+    return next({
+      name: 'UnauthorizedError'
+    })
+  }
+  return next()
+})
+app.use((req, res, next) => {
   if (!req.user) { return next() }
   UserBusiness.findOne({
     _id: req.user._id
