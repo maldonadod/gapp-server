@@ -6,12 +6,25 @@ const User = require('../../models/User')
 
 const author = {
   path: 'author',
-  select: User.USER_UNSELECTED_FIELDS
+  select: User.USER_UNSELECTED_FIELDS,
+  populate: {
+    path: 'country',
+    select: '-__v -_id'
+  }
+}
+
+const author_country = {
+  path: 'author.country',
+  select: '-__v -_id'
 }
 
 const guests = {
   path: 'guests.user',
-  select: User.USER_UNSELECTED_FIELDS
+  select: User.USER_UNSELECTED_FIELDS,
+  populate: {
+    path: 'country',
+    select: '-__v -_id'
+  }
 }
 
 const message_author = {
