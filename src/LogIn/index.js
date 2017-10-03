@@ -1,29 +1,21 @@
 const LogInBusiness = require('./business')
 const {
+  handlerPromise
+} = require('../../responses/PromiseHandler')
+const {
   GetUserToken
   ,CheckPassword
 } = require('../Auth/middleware')
 
+const getPromise = req => {
+  const {password,email} = req.body
+  return LogInBusiness.login({password,email})
+  .then(GetUserToken)
+  .then(CheckPassword.bind(null, password))
+}
+
+const post = handlerPromise(getPromise)
+
 module.exports = {
-  post: (req, res) => {
-    const {password,email} = req.body
-
-    LogInBusiness.login({password,email})
-    .then(GetUserToken)
-    .then(CheckPassword.bind(null, password))
-    .then(user => {
-
-      res.send({
-        status: 'OK',
-        data: user
-      })
-    })
-    .catch(err => {
-
-      res.send({
-        status: 'ERR',
-        message: err
-      })
-    })
-  }
+  post
 }
