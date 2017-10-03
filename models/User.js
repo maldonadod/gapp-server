@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const mongoosePaginate = require('mongoose-paginate')
+const {
+  Country
+} = require('./Country')
 
 const User = new Schema({
   last_name: String,
