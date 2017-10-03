@@ -43,7 +43,7 @@ const get = (req, res) => {
 
   params = Utils.mergeQueries([defaultParams, params])
 
-  GuestsBusiness.getPaginate(params, paginationOptions)
+  UsersBusiness.getPaginate(params, paginationOptions)
   .then(guests => res.send(parseResponse(good(guests))))
   .catch(err => res.send(bad(err)))
 }
