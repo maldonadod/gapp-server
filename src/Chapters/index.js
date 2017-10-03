@@ -39,7 +39,10 @@ const post = (req, res) => {
   const input = req.body
 
   ChapterBusiness.post(input)
-  .then(chapter => res.send(success(chapter)))
+  .then(({_id}) => {
+    ChapterBusiness.getOne({_id})
+    .then(chapter => res.send(success(chapter)))
+  })
   .catch(err => res.send(error(err)))
 }
 
