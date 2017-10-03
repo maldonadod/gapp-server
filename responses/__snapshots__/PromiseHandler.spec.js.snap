@@ -18,6 +18,13 @@ Object {
 }
 `;
 
+exports[`handlerPromiseFactory handlerPromiseFactory should create a proper handler 1`] = `
+Object {
+  "message": "pepito",
+  "status": "ERR",
+}
+`;
+
 exports[`handlerPromisePagination the response match with Pagination.parseResponse 1`] = `
 Object {
   "data": Object {

@@ -24,6 +24,7 @@ const handlerPromisePagination = handlerPromiseFactory(responseSuccessPagination
 
 module.exports = {
   handlerPromiseFactory
+  ,formatAndResponse
   ,handlerPromise
   ,handlerPromisePagination
 }

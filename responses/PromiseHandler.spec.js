@@ -1,6 +1,7 @@
 const {
   handlerPromiseFactory
   ,handlerPromise
+  ,formatAndResponse
   ,handlerPromisePagination
 } = require('./PromiseHandler')
 
@@ -64,5 +65,37 @@ describe('handlerPromisePagination', () => {
       body
     })
     handler(req, res)
+  })
+})
+
+describe('handlerPromiseFactory', () => {
+
+
+  test('handlerPromiseFactory should create a proper handler', () => {
+
+    const mockedSuccess = jest.fn(data => success(data))
+    const mockedError = jest.fn(message => error(message))
+    const promise = jest.fn(req => Promise.reject(req.body))
+
+    const res = resFactory(output => expect(output).toMatchSnapshot())
+
+    const handleResponseSuccess = formatAndResponse(mockedSuccess)
+    const handleResponseError = formatAndResponse(mockedError)
+
+    const handlerPromise = handlerPromiseFactory(handleResponseSuccess)(handleResponseError)
+
+    const handler = handlerPromise(promise)
+    const body = {
+      body: 'pepito'
+    }
+    const req = reqFactory(body)
+
+    handler(req, res)
+    .then(data => {
+      expect(promise.mock.calls.length).toEqual(1)
+      expect(mockedSuccess.mock.calls.length).toEqual(0)
+      expect(res.send.mock.calls.length).toEqual(1)
+      expect(mockedError.mock.calls.length).toEqual(1)
+    })
   })
 })
