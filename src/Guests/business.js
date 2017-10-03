@@ -3,15 +3,6 @@ const {
   Chapter
 } = require('../../models/Chapter')
 
-const get = params => {
-  return User.find(params, User.USER_UNSELECTED_FIELDS)
-}
-
-const getPaginate = (params,paginationOptions) => {
-  paginationOptions.select = User.USER_UNSELECTED_FIELDS
-  return User.paginate(params, paginationOptions)
-}
-
 const update = (_id, guest_id, {status}) => {
   return Chapter.findOne({
     _id
@@ -30,7 +21,5 @@ const update = (_id, guest_id, {status}) => {
 }
 
 module.exports = {
-  get
-  ,getPaginate
-  ,update
+  update
 }
