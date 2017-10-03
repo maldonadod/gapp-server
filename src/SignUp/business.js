@@ -1,4 +1,5 @@
 const User = require('../../models/User')
+const UserBusiness = require('../Users/business')
 
 const register = ({
   email
@@ -21,6 +22,7 @@ const register = ({
         first_name,
         last_name,
         password,
+        country: User.DEFAULT_COUNTRY_ID,
         profile_picture,
         authentication: {
           email,
@@ -31,6 +33,7 @@ const register = ({
 
       return new User(user)
         .save()
+        .then(({_id}) => UserBusiness.findOne({_id}))
     } else {
       return Promise.reject('Email currently in use')
     }
