@@ -52,7 +52,7 @@ app.use((err, req, res, next) => {
 
 app.get('/', HomeHandler)
 
-app.post('/signup', Sign.post);
+app.post('/signup', Sign.post());
 app.post('/login', Login.post());
 
 //AUTHORIZATION REQUIRED
