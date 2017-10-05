@@ -13,9 +13,15 @@ const getPromise = req => {
   return LogInBusiness.login({password,email})
   .then(GetUserToken)
   .then(CheckPassword.bind(null, password))
-  .then(({_id}) => {
+  .then(user => {
     return UserBusiness.findOne({
-      _id
+      _id: user._id
+    })
+    .then(({country}) => {
+
+      return Object.assign({}, user.toObject(), {
+        country
+      })
     })
   })
 }
