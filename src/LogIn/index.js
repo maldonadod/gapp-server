@@ -1,4 +1,5 @@
 const LogInBusiness = require('./business')
+const UserBusiness = require('../Users/business')
 const {
   handlerPromise
 } = require('../../responses/PromiseHandler')
@@ -12,6 +13,11 @@ const getPromise = req => {
   return LogInBusiness.login({password,email})
   .then(GetUserToken)
   .then(CheckPassword.bind(null, password))
+  .then(({_id}) => {
+    return UserBusiness.findOne({
+      _id
+    })
+  })
 }
 
 const post = handlerPromise(getPromise)
