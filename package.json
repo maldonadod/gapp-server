@@ -26,6 +26,8 @@
     "jsonwebtoken": "^8.0.0",
     "mongoose": "^4.11.11",
     "mongoose-paginate": "^5.0.3",
-    "node-gcm": "^0.14.6"
+    "node-gcm": "^0.14.6",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
   }
 }
