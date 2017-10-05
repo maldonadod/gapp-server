@@ -15,6 +15,7 @@ const Login = require('../src/LogIn')
 const Chapters = require('../src/Chapters')
 const Users = require('../src/Users')
 const Guests = require('../src/Guests')
+const Places = require('../src/Places')
 
 const UserProfile = require('../src/UserProfile')
 
@@ -63,6 +64,7 @@ app.get('/', HomeHandler)
 
 app.post('/signup', Sign.post);
 app.post('/login', Login.post);
+app.get('/places', Places.get);
 
 //AUTHORIZATION REQUIRED
 app.get('/profile/me', UserProfile.get)
