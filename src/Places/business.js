@@ -2,7 +2,7 @@ const queryPlacesFrom = api => query => {
   return api(query)
 }
 
-const parseResponseOf = parser => api => query => parser(queryPlacesFrom(api)(query))
+const from = parser => api => query => parser(queryPlacesFrom(api)(query))
 
 const parseAddress = address => {
   return address
@@ -11,23 +11,28 @@ const parseAddress = address => {
   .map(chunk => chunk.trim())
   .join(', ')
 }
-const formatPlace = ({formatted_address, name, geometry}) => ({
+const formatItem = ({formatted_address, geometry}) => ({
   formatted_address: parseAddress(formatted_address),
   coords: geometry.location
 })
 
-const parser = promise => {
-    
-  return promise
-  .then(res => {
-    
-    if (res.status === 'OK') {
-      return res.results.map(formatPlace)
-    }
-    return res
-  })
+const isOK = selector => res => selector(res) === 'OK'
+const selectStatus = res => !res.hasOwnProperty('status') ? null : res.status
+
+const applyParser = selector => 
+                    isAplicable => 
+                    getCollec => 
+                    formatItem => 
+                    res => isAplicable(selector)(res) && getCollec(res).map(formatItem)
+
+const selectCollection = res => res.results
+
+const parser = applyit => promise => {
+  return promise.then(applyit)
 }
 
+const getCollection = res => res.results
+
 module.exports = {
-  queryPlacesFrom: parseResponseOf(parser)
+  queryPlacesFrom: from(parser(applyParser(selectStatus)(isOK)(getCollection)(formatItem)))
 }
