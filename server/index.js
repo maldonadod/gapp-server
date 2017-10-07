@@ -1,82 +1,22 @@
 const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const db = require('../db')
-const UserBusiness = require('../src/Users/business')
-var jwte = require('express-jwt')
-const {
-  AUTH_TOKEN_SAUCE
-} = require('../src/Auth/constants')
-
-app.use(bodyParser.json({extended: true}))
-
-const Sign = require('../src/SignUp')
-const Login = require('../src/LogIn')
-const Chapters = require('../src/Chapters')
-const Users = require('../src/Users')
-const Guests = require('../src/Guests')
-const Places = require('../src/Places')
-
-const UserProfile = require('../src/UserProfile')
-
+const server = express()
 const PORT = process.env.PORT || 9052
 
-const HomeHandler = (req, res) => {
-  res.send('G ~ OnLine')
+const ERROR_HANDLER = (err, req, res, next) => {
+  const {status = 200,message = null} = err
+  return res.status(status).send(message)
 }
 
-app.use(jwte({secret: AUTH_TOKEN_SAUCE}).unless({path: ['/login', '/signup', '/']}))
+const REGISTER_ROUTE = ({method, path, handlers}) => {
+  server[method].call(server, path, ...handlers)
+}
 
-app.use((req, res, next) => {
+const DISPATCH_CALLBACK = () => console.log(`Listening at ${PORT}`)
 
-  if (req.headers['x-api-key'] !== process.env.API_KEY) {
-    return next({
-      name: 'UnauthorizedError'
-    })
-  }
-  return next()
-})
-app.use((req, res, next) => {
-  if (!req.user) { return next() }
-  UserBusiness.findOne({
-    _id: req.user._id
-  })
-  .then(user => {
-    if (!user) {
-      return next('User not found')
-    }
-    req.loggedInUser = Object.assign({}, user.toJSON())
-    return next()
-  })
-})
-
-app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') {
-    res.status(401).send('invalid token');
-  }
-  if (err) {
-    console.log(err)
-    res.status(400).send('bad request')
-  }
-});
-
-app.get('/', HomeHandler)
-
-app.post('/signup', Sign.post);
-app.post('/login', Login.post);
-app.get('/places', Places.get);
-
-//AUTHORIZATION REQUIRED
-app.get('/profile/me', UserProfile.get)
-app.get('/profile/me/events', UserProfile.getMyChapters)
-app.get('/events/:_id?', Chapters.get)
-app.post('/events', Chapters.post)
-app.patch('/events/:_id?', Chapters.update)
-
-app.get('/users', Guests.get)
-app.get('/events/:chapter_id/guests', Guests.byEvent)
-app.patch('/events/:chapter_id/guests/:guest_id', Guests.update)
-
-app.listen(PORT, function() {
-  console.log(`Listening at ${PORT}`)
-})
+module.exports = {
+  server
+  ,ERROR_HANDLER
+  ,PORT
+  ,DISPATCH_CALLBACK
+  ,REGISTER_ROUTE
+}
