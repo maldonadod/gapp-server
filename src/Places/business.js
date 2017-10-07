@@ -37,4 +37,8 @@ const queryPlacesFrom = from_promise(is_ok_then_format)
 
 module.exports = {
   queryPlacesFrom
+  ,from_promise
+  ,select_results
+  ,is_status_ok
+  ,format_flow
 }
