@@ -29,21 +29,22 @@ describe('Places queryPlacesFrom',  () => {
   
   test('should call to api', () => {
     const api = jest.fn(query => Promise.resolve(modelFactory()))
-    queryPlacesFrom(api)('queso')
-    .then(res => {
-      expect(api.mock.calls.length).toEqual(1)
-    })
+    expect.assertions(1)
+    return queryPlacesFrom(api)('queso')
+    .then(res => expect(api.mock.calls.length).toEqual(1))
   })
   test('response from api should be parsed and match with the success model', () => {
     const api_res = modelFactory()
     const api = jest.fn(query => Promise.resolve(api_res))
-    queryPlacesFrom(api)('nana')
+    expect.assertions(1)
+    return queryPlacesFrom(api)('nana')
     .then(res => expect(res).toEqual(success()))
   })
   test('query should be pass into api', () => {
     const query = 'nana'
     const api = jest.fn(query => Promise.resolve({}))
-    queryPlacesFrom(api)(query)
+    expect.assertions(1)
+    return queryPlacesFrom(api)(query)
     .then(res => expect(api.mock.calls[0][0]).toEqual(query))
   })
 })
