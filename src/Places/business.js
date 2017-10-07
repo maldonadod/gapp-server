@@ -1,38 +1,40 @@
-const queryPlacesFrom = api => query => {
-  return api(query)
-}
+const {
+  checkOwnPropery
+} = require('../../utils/checkOwnPropery')
+const {
+  isOKSelector
+} = require('../../messages')
 
-const from = parser => api => query => parser(queryPlacesFrom(api)(query))
+const has_status_propery = checkOwnPropery('status')
+const has_results_propery = checkOwnPropery('results')
 
-const parseAddress = address => {
+// PRESENTER
+const format_item = ({formatted_address, geometry}) => ({
+  formatted_address: parse_address(formatted_address),
+  coords: geometry.location
+})
+const parse_address = address => {
   return address
   .replace(/([A-Z]{1}\d{4}[A-Z]{3}|[A-Z]{1}\d{4})/, '')
   .split(',')
   .map(chunk => chunk.trim())
   .join(', ')
 }
-const formatItem = ({formatted_address, geometry}) => ({
-  formatted_address: parseAddress(formatted_address),
-  coords: geometry.location
-})
 
-const isOK = selector => res => selector(res) === 'OK'
-const selectStatus = res => !res.hasOwnProperty('status') ? null : res.status
 
-const applyParser = selector => 
-                    isAplicable => 
-                    getCollec => 
-                    formatItem => 
-                    res => isAplicable(selector)(res) && getCollec(res).map(formatItem)
+// DEFAULT LOGIC FLOW
+const from_promise = handler => Api => query => Api(query).then(handler)
+const select_results = incoming => has_results_propery(incoming) ? incoming.results : []
+const is_status_ok = isOKSelector(has_status_propery)
+const format_flow = get_results => 
+                    format_item => 
+                    incoming    => get_results(incoming).map(format_item)
 
-const selectCollection = res => res.results
-
-const parser = applyit => promise => {
-  return promise.then(applyit)
-}
-
-const getCollection = res => res.results
+// COMPOSE
+const format = format_flow(select_results)(format_item)
+const is_ok_then_format = incoming => is_status_ok(incoming) && format(incoming)
+const queryPlacesFrom = from_promise(is_ok_then_format)
 
 module.exports = {
-  queryPlacesFrom: from(parser(applyParser(selectStatus)(isOK)(getCollection)(formatItem)))
+  queryPlacesFrom
 }
