@@ -51,9 +51,7 @@ const VALIDATE_USER_ID_FROM_REQ = (req, res, next) => {
   })
   .then(user => {
     if (!user) {
-      return next({
-        name: 'UnauthorizedError'
-      })
+      return next(UnauthorizedError)
     }
     req.loggedInUser = Object.assign({}, user.toJSON())
     return next()
