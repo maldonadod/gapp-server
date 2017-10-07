@@ -17,14 +17,6 @@ const modelFactory = () => ({
   ]
 })
 
-const success = () => ([{
-  "formatted_address": "Av. Corrientes 455, CABA, Argentina",
-  "coords": {
-    "lat": -34.6029208,
-    "lng": -58.3732758
-  }
-}])
-
 describe('Places queryPlacesFrom',  () => {
   
   test('should call to api', () => {
@@ -38,7 +30,7 @@ describe('Places queryPlacesFrom',  () => {
     const api = jest.fn(query => Promise.resolve(api_res))
     expect.assertions(1)
     return queryPlacesFrom(api)('nana')
-    .then(res => expect(res).toEqual(success()))
+    .then(res => expect(res).toMatchSnapshot())
   })
   test('query should be pass into api', () => {
     const query = 'nana'

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Places queryPlacesFrom response from api should be parsed and match with the success model 1`] = `
+Array [
+  Object {
+    "coords": Object {
+      "lat": -34.6029208,
+      "lng": -58.3732758,
+    },
+    "formatted_address": "Av. Corrientes 455, CABA, Argentina",
+  },
+]
+`;
