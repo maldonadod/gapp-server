@@ -17,6 +17,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.0",
+    "busboy": "^0.2.14",
     "cloudinary": "1.0.10",
     "co": "^4.6.0",
     "dotenv": "^4.0.0",
