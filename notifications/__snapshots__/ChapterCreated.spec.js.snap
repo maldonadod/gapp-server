@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChapterCreated chapter created payload should match 1`] = `
+Array [
+  "Pepe invite you",
+  Array [
+    "regid1",
+    "regid2",
+  ],
+]
+`;
+
+exports[`ChapterCreated chapter created payload should match 2`] = `
+Object {
+  "collapse_key": undefined,
+  "data": "Pepe invite you",
+  "notification": undefined,
+  "to": Array [
+    "regid1",
+    "regid2",
+  ],
+}
+`;
