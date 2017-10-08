@@ -32,7 +32,17 @@ const message_author = {
   select: User.USER_UNSELECTED_FIELDS
 }
 
-const unselected_fields = '-__v -messages'
+const unselected_fields = `
+  -__v -messages 
+  -cover.public_id 
+  -cover.etag 
+  -cover.url 
+  -cover.resource_type 
+  -cover.type 
+  -cover.tags 
+  -cover.signature 
+  -cover.original_filename 
+  -cover.bytes`
 
 const get = (params = {}) => {
   return Chapter.find(params, unselected_fields)
