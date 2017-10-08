@@ -8,6 +8,40 @@ const Places = require('../src/Places')
 const UserProfile = require('../src/UserProfile')
 const HomeHandler = (req, res) => res.send('G ~ OnLine')
 
+const cloudinary = require('cloudinary')
+const Busboy = require('busboy')
+
+const {
+  CLOUDINARY_CLOUD_NAME
+  ,CLOUDINARY_API_KEY
+  ,CLOUDINARY_API_SECRET
+} = process.env
+
+const upload = (req, res, next) => {
+  
+  cloudinary.config({ 
+    cloud_name: CLOUDINARY_CLOUD_NAME
+    ,api_key: CLOUDINARY_API_KEY
+    ,api_secret: CLOUDINARY_API_SECRET
+  });
+  
+  const stream = cloudinary.uploader.upload_stream(upload => {
+
+    req.chapter = {
+      cover: Object.assign({}, upload)
+    }
+    next()
+  });
+
+  const busboy = new Busboy({ headers: req.headers });
+  
+  busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+    file.on('data', stream.write).on('end', stream.end)
+  })
+
+  req.pipe(busboy)
+}
+
 const routes = [
   {
     method: 'get',
@@ -52,7 +86,7 @@ const routes = [
   ,{
     method: 'post',
     path: '/events',
-    handlers: [Chapters.post]
+    handlers: [upload, Chapters.post]
   }
   ,{
     method: 'patch',
