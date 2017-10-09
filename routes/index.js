@@ -19,6 +19,9 @@ const {
 
 const upload = (req, res, next) => {
   
+  console.log('Headers: ', req.headers)
+  console.log('Body: ', req.body)
+  
   cloudinary.config({ 
     cloud_name: CLOUDINARY_CLOUD_NAME
     ,api_key: CLOUDINARY_API_KEY
@@ -27,16 +30,24 @@ const upload = (req, res, next) => {
   
   const stream = cloudinary.uploader.upload_stream(upload => {
 
-    req.chapter = {
+    req.chapter = Object.assign({}, req.chapter, {
       cover: Object.assign({}, upload)
-    }
+    })
+    
     next()
   });
 
   const busboy = new Busboy({ headers: req.headers });
+
+  busboy.on('err',  err => console.log(err))
+  busboy.on('error',  err => console.log(err))
   
   busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
     file.on('data', stream.write).on('end', stream.end)
+  })
+  
+  busboy.on('field', function(field, value) {
+    console.log(field, value)
   })
 
   req.pipe(busboy)

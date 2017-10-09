@@ -36,6 +36,9 @@ const get = (req, res) => {
 
 const post = (req, res) => {
 
+  console.log('Chapter: ', req.chapter)
+  console.log('Body2: ', req.body)
+
   const input = Object.assign({}, req.body, req.chapter)
   
   ChapterBusiness.post(input)
