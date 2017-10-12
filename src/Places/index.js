@@ -1,5 +1,5 @@
 const {
-  handlerPromise
+  PromiseHandler
 } = require('../../responses/PromiseHandler')
 
 const {
@@ -21,7 +21,7 @@ const getPlacesPromise = req => {
   return placeApi(query.query)
 }
 
-const get = handlerPromise(getPlacesPromise)
+const get = PromiseHandler(getPlacesPromise)
 
 module.exports = {
   get
