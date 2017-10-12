@@ -61,6 +61,7 @@ Array [
   Object {
     "handlers": Array [
       [Function],
+      [Function],
     ],
     "method": "post",
     "path": "/events",

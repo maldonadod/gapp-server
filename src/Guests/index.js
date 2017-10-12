@@ -24,10 +24,8 @@ const bad = err => ({
   message: err
 })
 
-
 const {
-  handlerPromise
-  ,handlerPromisePagination
+  PromiseHandlerPaginate
 } = require('../../responses/PromiseHandler')
 
 const getGuestListPromise = req => {
@@ -52,7 +50,7 @@ const getGuestListPromise = req => {
   return UsersBusiness.getPaginate(params, paginationOptions)
 }
 
-const get = handlerPromisePagination(getGuestListPromise)
+const get = PromiseHandlerPaginate(getGuestListPromise)
 
 const byEvent = (req, res) => {
 
