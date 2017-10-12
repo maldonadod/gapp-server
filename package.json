@@ -31,6 +31,7 @@
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.0",
     "node-gcm": "^0.14.6",
+    "redux": "^3.7.2",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5"
   }
