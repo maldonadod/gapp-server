@@ -1,6 +1,6 @@
 const SignUpBusiness = require('./business');
 const {
-  handlerPromise
+  PromiseHandler
 } = require('../../responses/PromiseHandler');
 const {
   GetUserToken
@@ -21,7 +21,7 @@ const getSignUpPromise = req => {
   })
 }
 
-const post = handlerPromise(getSignUpPromise)
+const post = PromiseHandler(getSignUpPromise)
 
 module.exports = {
   post

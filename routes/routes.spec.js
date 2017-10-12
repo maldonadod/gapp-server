@@ -1,3 +1,4 @@
+jest.mock('cloudinary')
 const {
   routes
 } = require('./index')

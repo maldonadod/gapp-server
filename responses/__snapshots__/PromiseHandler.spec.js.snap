@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handlerPromise res should be called once on error and response model should match 1`] = `
+exports[`PromiseHandler res should be called once on error and response model should match 1`] = `
 Object {
   "message": Object {
     "name": "Homer Simpson",
@@ -9,7 +9,7 @@ Object {
 }
 `;
 
-exports[`handlerPromise res should be called once on success and response model should match 1`] = `
+exports[`PromiseHandler res should be called once on success and response model should match 1`] = `
 Object {
   "data": Object {
     "name": "Homer Simpson",
@@ -18,14 +18,7 @@ Object {
 }
 `;
 
-exports[`handlerPromiseFactory handlerPromiseFactory should create a proper handler 1`] = `
-Object {
-  "message": "pepito",
-  "status": "ERR",
-}
-`;
-
-exports[`handlerPromisePagination the response match with Pagination.parseResponse 1`] = `
+exports[`PromiseHandlerPaginate the response match with Pagination.parseResponse 1`] = `
 Object {
   "data": Object {
     "paging": Object {
@@ -36,5 +29,12 @@ Object {
     "results": Array [],
   },
   "status": "OK",
+}
+`;
+
+exports[`handlerPromiseFactory handlerPromiseFactory should create a proper handler 1`] = `
+Object {
+  "message": "pepito",
+  "status": "ERR",
 }
 `;

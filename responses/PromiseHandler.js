@@ -1,30 +1,39 @@
 const {
   success
   ,error
-} = require('../responses')
+} = require('./models')
 
 const {
   parseResponse
 } = require('../src/Pagination/business')
 
-const successPagination = success => parseResponse => data => parseResponse(success(data))
-const formatAndResponse = format => res => data => res.send(format(data))
-const responseSuccessPagination = formatAndResponse(successPagination(success)(parseResponse))
-const responseSuccess = formatAndResponse(success)
-const responseError = formatAndResponse(error)
-
-const handlerPromiseFactory = success => error => getPromise => (req, res) => {
+const promiseHandlerFactory = (success, error) => getPromise => (req, res) => {
   return getPromise(req)
   .then(success(res))
   .catch(error(res))
 }
 
-const handlerPromise = handlerPromiseFactory(responseSuccess)(responseError)
-const handlerPromisePagination = handlerPromiseFactory(responseSuccessPagination)(responseError)
+const _express_res_send = res => body => res.send(body)
+
+// DIGEST BEFORE SEND FLOW
+// plugin access to response object - returns a function
+// api_model access to response data - returns object
+// res response obj
+// raw response data
+const digestFlow = plugin => api_model => res => raw => plugin(res)(api_model(raw))
+
+// COMPOSING
+const _disgestExpress = digestFlow(_express_res_send) // prepare for communicate with Response 
+const _digestError = _disgestExpress(error) // digest error case
+const _digestSuccess = _disgestExpress(success) // digest error case
+
+const PromiseHandler = promiseHandlerFactory(_digestSuccess, _digestError)
+
+const paginate = data => parseResponse(success(data))
+const _digestSuccessPagination = _disgestExpress(paginate)
+const PromiseHandlerPaginate = promiseHandlerFactory(_digestSuccessPagination, _digestError)
 
 module.exports = {
-  handlerPromiseFactory
-  ,formatAndResponse
-  ,handlerPromise
-  ,handlerPromisePagination
+  PromiseHandler
+  ,PromiseHandlerPaginate
 }

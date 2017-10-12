@@ -9,8 +9,8 @@ const {
 } = require('../../selectors')
 
 const {
-  handlerPromise
-  ,handlerPromisePagination
+  PromiseHandler
+  ,PromiseHandlerPaginate
 } = require('../../responses/PromiseHandler')
 
 module.exports = (function() {
@@ -22,8 +22,8 @@ module.exports = (function() {
   }
  
   // create handlers
-  const get = handlerPromise(getUserPromise(getLoggedUserIdFromReq))
-  const getMyChapters = handlerPromisePagination(getMyChapterPromise(getAuthorFromLoggedUser)(getPaginateOptionsFromReq))
+  const get = PromiseHandler(getUserPromise(getLoggedUserIdFromReq))
+  const getMyChapters = PromiseHandlerPaginate(getMyChapterPromise(getAuthorFromLoggedUser)(getPaginateOptionsFromReq))
  
   return {
     get

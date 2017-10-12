@@ -10,7 +10,7 @@ Array [
 ]
 `;
 
-exports[`ChapterCreated chapter created payload should match 2`] = `
+exports[`ChapterCreated send response match with snapshot 1`] = `
 Object {
   "collapse_key": undefined,
   "data": "Pepe invite you",
