@@ -36,7 +36,7 @@ const get = (req, res) => {
 
 const post = (req, res) => {
 
-  const input = Object.assign({}, req.body, req.chapter)
+  const input = Object.assign({}, res.locals)
   
   ChapterBusiness.post(input)
   .then(({_id}) => {
