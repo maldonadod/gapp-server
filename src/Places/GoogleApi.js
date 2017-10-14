@@ -6,8 +6,34 @@ const config = {
 }
 const createUrl = query => `${URL}?key=${API_KEY}&query=${query}`
 
+const indian = {
+  status: 'OK',
+  results: [
+    {
+      formatted_address: 'La CTM'
+      ,geometry: {
+        location: {
+          latitude: -34,
+          longitud: 58
+        }
+      }
+    }
+  ]
+}
+
 const GooglePlacesApi = query => {
   return request(createUrl(query), config)
+  .then(res => {
+    console.log(res)
+    
+    return indian
+  })
+  .catch(err => {
+    
+    console.log('Err:', err)
+    
+    return Promise.resolve(indian)
+  })
 }
 
 module.exports = {
