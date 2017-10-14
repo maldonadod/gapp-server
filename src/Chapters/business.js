@@ -36,7 +36,6 @@ const unselected_fields = `
   -__v -messages 
   -cover.public_id 
   -cover.etag 
-  -cover.url 
   -cover.resource_type 
   -cover.type 
   -cover.tags 
