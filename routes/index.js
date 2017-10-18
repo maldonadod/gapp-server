@@ -10,6 +10,10 @@ const HomeHandler = (req, res) => res.send('G ~ OnLine')
 
 const UploadMiddleware = require('../upload/middleware')
 
+const {
+  chapterFormatNotification
+} = require('../src/Chapters/business')
+
 const routes = [
   {
     method: 'get',
@@ -54,7 +58,7 @@ const routes = [
   ,{
     method: 'post',
     path: '/events',
-    handlers: [UploadMiddleware, Chapters.post]
+    handlers: [UploadMiddleware(chapterFormatNotification), Chapters.post]
   }
   ,{
     method: 'patch',

@@ -4,6 +4,12 @@ const {
 
 const User = require('../../models/User')
 
+const chapterFormatNotification = ({secure_url}) => ({
+  cover: {
+    url: secure_url
+  }
+})
+
 const author = {
   path: 'author',
   select: User.USER_UNSELECTED_FIELDS,
@@ -86,4 +92,5 @@ module.exports = {
   ,getOne
   ,paginate
   ,update
+  ,chapterFormatNotification
 }
