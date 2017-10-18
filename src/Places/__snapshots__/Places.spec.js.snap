@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Places queryPlacesFrom response from api should be parsed and match with the success model 1`] = `
+Array [
+  Object {
+    "coords": Object {
+      "lat": -34.6029208,
+      "lng": -58.3732758,
+    },
+    "formatted_address": "Av. Corrientes 455, CABA, Argentina",
+  },
+]
+`;
+
+exports[`format_flow piece format each item pass in by get_results 1`] = `
+Array [
+  "The doors created on 1965 July was a band integrated by Jim Morrison, Ray Manzarek, John Densmore and Robby Krieger",
+  "Led zepelin created on 1968 was a band integrated by Robert PlantJimmy Page, John Bonham and John Paul Jones",
+]
+`;
+
+exports[`format_flow piece get results and double each item 1`] = `
+Array [
+  2,
+  4,
+  6,
+]
+`;
+
+exports[`format_flow piece get results and return each item 1`] = `
+Array [
+  1,
+  2,
+  3,
+]
+`;

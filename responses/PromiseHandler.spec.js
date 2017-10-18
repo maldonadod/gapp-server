@@ -1,8 +1,8 @@
 const {
   handlerPromiseFactory
-  ,handlerPromise
+  ,PromiseHandler
   ,formatAndResponse
-  ,handlerPromisePagination
+  ,PromiseHandlerPaginate
 } = require('./PromiseHandler')
 
 const {
@@ -29,31 +29,31 @@ const resFactory = (fn) => ({
   send: jest.fn(fn)
 })
 
-describe('handlerPromise', () => {
+describe('PromiseHandler', () => {
   test('getPromise should be called in order to get a promise', () => {
     const getPromise = getPromiseFactory()
-    const handler = handlerPromise(getPromise)
+    const handler = PromiseHandler(getPromise)
     const res = resFactory()
     handler(req, res)
     .then(() => expect(getPromise.mock.calls.length).toEqual(1))
   })
   test('res should be called once on success and response model should match', () => {
-    const handler = handlerPromise(getPromiseFactory())
+    const handler = PromiseHandler(getPromiseFactory())
     const res = resFactory(data => expect(data).toMatchSnapshot())
     handler(req, res)
     .then(() => expect(res.send.mock.calls.length).toEqual(1))
   })
   test('res should be called once on error and response model should match', () => {
-    const handler = handlerPromise(getPromiseRejectedFactory())
+    const handler = PromiseHandler(getPromiseRejectedFactory())
     const res = resFactory(data => expect(data).toMatchSnapshot())
     handler(req, res)
     .then(() => expect(res.send.mock.calls.length).toEqual(1))
   })
 })
 
-describe('handlerPromisePagination', () => {
+describe('PromiseHandlerPaginate', () => {
   test('the response match with Pagination.parseResponse', () => {
-    const handler = handlerPromisePagination(getPromiseFactory())
+    const handler = PromiseHandlerPaginate(getPromiseFactory())
     const res = resFactory(data => expect(data).toMatchSnapshot())
     const body = {
       docs: []
@@ -68,7 +68,7 @@ describe('handlerPromisePagination', () => {
   })
 })
 
-describe('handlerPromiseFactory', () => {
+describe.skip('handlerPromiseFactory', () => {
 
 
   test('handlerPromiseFactory should create a proper handler', () => {
@@ -82,9 +82,9 @@ describe('handlerPromiseFactory', () => {
     const handleResponseSuccess = formatAndResponse(mockedSuccess)
     const handleResponseError = formatAndResponse(mockedError)
 
-    const handlerPromise = handlerPromiseFactory(handleResponseSuccess)(handleResponseError)
+    const PromiseHandler = handlerPromiseFactory(handleResponseSuccess, handleResponseError)
 
-    const handler = handlerPromise(promise)
+    const handler = PromiseHandler(promise)
     const body = {
       body: 'pepito'
     }

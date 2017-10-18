@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Map of routes should match snapshot 1`] = `
+Array [
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "post",
+    "path": "/signup",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "post",
+    "path": "/login",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/places",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/places",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/profile/me",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/profile/me/events",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/events/:_id?",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+      [Function],
+    ],
+    "method": "post",
+    "path": "/events",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "patch",
+    "path": "/events/:_id",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/users",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/events/:chapter_id/guests",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "patch",
+    "path": "/events/:chapter_id/guests/:guest_id",
+  },
+]
+`;

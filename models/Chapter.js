@@ -34,10 +34,13 @@ const GuestSchema = new Schema({
 const ChapterSchema = new Schema({
   date: Date,
   guests: [GuestSchema],
-  address: String,
+  address: {},
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  cover: {
+    url: String
   },
   messages: [MessageSchema],
   description: String,

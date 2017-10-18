@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChapterCreated chapter created payload should match 1`] = `
+Array [
+  "will you join to the Pepe's party, mister ?",
+  Array [
+    "regid1",
+    "regid2",
+  ],
+]
+`;
+
+exports[`ChapterCreated send response match with snapshot 1`] = `
+Object {
+  "collapse_key": undefined,
+  "data": "will you join to the Pepe's party, mister ?",
+  "notification": undefined,
+  "to": Array [
+    "regid1",
+    "regid2",
+  ],
+}
+`;

@@ -1,13 +1,13 @@
 const {
   success
   ,error
-} = require('../../responses');
-const co = require('co');
-const ChapterBusiness = require('./business');
+} = require('../../responses')
+const co = require('co')
+const ChapterBusiness = require('./business')
 const {
   getOptions
   ,parseResponse
-} = require('../Pagination/business');
+} = require('../Pagination/business')
 
 const get = (req, res) => {
 
@@ -36,8 +36,8 @@ const get = (req, res) => {
 
 const post = (req, res) => {
 
-  const input = req.body
-
+  const input = Object.assign({}, res.locals)
+  
   ChapterBusiness.post(input)
   .then(({_id}) => {
     ChapterBusiness.getOne({_id})

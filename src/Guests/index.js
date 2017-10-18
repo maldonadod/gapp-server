@@ -24,8 +24,12 @@ const bad = err => ({
   message: err
 })
 
-const get = (req, res) => {
+const {
+  PromiseHandlerPaginate
+} = require('../../responses/PromiseHandler')
 
+const getGuestListPromise = req => {
+  
   const {_id} = req.loggedInUser
   const {name} = req.query
   const paginationOptions = getOptions(req.query)
@@ -36,17 +40,17 @@ const get = (req, res) => {
       $ne: _id
     }
   }
-
+  
   if (name) {
     params = UsersBusiness.filterByFullName(name)
   }
 
   params = Utils.mergeQueries([defaultParams, params])
 
-  UsersBusiness.getPaginate(params, paginationOptions)
-  .then(guests => res.send(parseResponse(good(guests))))
-  .catch(err => res.send(bad(err)))
+  return UsersBusiness.getPaginate(params, paginationOptions)
 }
+
+const get = PromiseHandlerPaginate(getGuestListPromise)
 
 const byEvent = (req, res) => {
 
