@@ -10,7 +10,7 @@ Busboy.prototype.on = function (key, handler) {
   return this
 }
 
-Busboy.prototype.feed = function ({fieldname}) {
+Busboy.prototype.feed = function ({fieldname, fields}) {
   const fileEmmiter = new EventEmitter()
   
   const file = {
@@ -22,6 +22,7 @@ Busboy.prototype.feed = function ({fieldname}) {
   }
   
   this.store.emit('file', fieldname, file)
+  this.store.emit('field', 'data', JSON.stringify(fields))
 
   setTimeout(() => {
     fileEmmiter.emit('end')

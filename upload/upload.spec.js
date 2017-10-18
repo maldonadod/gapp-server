@@ -23,16 +23,19 @@ describe('Upload', () => {
 
   test('middleware', done => {
     expect.assertions(2)
+    const chapter = {
+      description: 'The description'
+    }
     const req = {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-      ,pipe: thing => thing.feed({file: {fieldname: 'cover'}})
+      ,pipe: thing => thing.feed({fieldname: 'cover', fields: chapter})
     }
     const res = {}
     const next = jest.fn(makeCallback(done, () => {
       const cover = cloudinary.getCover()
-      expect(res.locals).toEqual(chapterFormatNotification(cover))
+      expect(res.locals).toMatchSnapshot()
       expect(next.mock.calls.length).toEqual(1)
     }))
     
