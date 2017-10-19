@@ -86,6 +86,10 @@ const post = input => {
 
 const update = ({_id}, input) => Chapter.update({_id}, { $set: input })
 
+const InvitationQuery = ({author}) => ({
+  author: { $ne: author }
+})
+
 module.exports = {
   get
   ,post
@@ -93,4 +97,5 @@ module.exports = {
   ,paginate
   ,update
   ,chapterFormatNotification
+  ,InvitationQuery
 }

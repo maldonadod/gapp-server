@@ -11,32 +11,28 @@ const {
 
 const {
   getLoggedUserIdFromReq
+  ,getPaginateOptionsFromReq
 } = require('../../selectors')
 
-const get = (req, res) => {
-
+const {
+  PromiseHandler
+  ,PromiseHandlerPaginate
+} = require('../../responses/PromiseHandler')
+  
+const getPromise = req => {
   const {_id} = req.params
-  const paginateOptions = getOptions(req.query)
-  const params = {}
-  let promise;
-  let handler;
-  if (_id) {
-    params._id = _id
-    promise = ChapterBusiness.getOne(params)
-
-    handler = chapter => res.send(success(chapter))
-  } else {
-    promise = ChapterBusiness.paginate(params, paginateOptions)
-
-    handler = chapters => {
-      res.send(parseResponse(success(chapters)))
-    }
-  }
-
-  promise
-  .then(handler)
-  .catch(err => res.send(error(err)))
+  return ChapterBusiness.getOne({_id})
 }
+
+const getInvitationPromise = req => {
+  const {_id} = getLoggedUserIdFromReq(req)
+  const params = { author: _id }
+  return ChapterBusiness.paginate(ChapterBusiness.InvitationQuery(params), getPaginateOptionsFromReq(req))
+}
+
+const get = PromiseHandler(getPromise)
+
+const invitation = PromiseHandlerPaginate(getInvitationPromise)
 
 const post = (req, res) => {
 
@@ -79,4 +75,5 @@ module.exports = {
   get
   ,post
   ,update
+  ,invitation
 }

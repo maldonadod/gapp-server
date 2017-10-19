@@ -52,8 +52,13 @@ const routes = [
   }
   ,{
     method: 'get',
-    path: '/events/:_id?',
+    path: '/events/:_id',
     handlers: [Chapters.get]
+  }
+  ,{
+    method: 'get',
+    path: '/events',
+    handlers: [Chapters.invitation]
   }
   ,{
     method: 'post',
