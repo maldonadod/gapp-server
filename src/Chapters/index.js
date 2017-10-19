@@ -9,6 +9,10 @@ const {
   ,parseResponse
 } = require('../Pagination/business')
 
+const {
+  getLoggedUserIdFromReq
+} = require('../../selectors')
+
 const get = (req, res) => {
 
   const {_id} = req.params
@@ -37,7 +41,12 @@ const get = (req, res) => {
 const post = (req, res) => {
 
   const input = Object.assign({}, res.locals)
+  const {
+    _id
+  } = getLoggedUserIdFromReq(req)
   
+  input.author = _id
+
   ChapterBusiness.post(input)
   .then(({_id}) => {
     ChapterBusiness.getOne({_id})
