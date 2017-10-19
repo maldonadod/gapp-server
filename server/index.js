@@ -1,9 +1,14 @@
 const express = require('express')
 const server = express()
 const PORT = process.env.PORT || 9052
+const store = require('../store')
+const {
+  errorAction
+} = require('../store/actions')
 
 const ERROR_HANDLER = (err, req, res, next) => {
   const {status = 200,message = null} = err
+  store.dispatch(errorAction(err))
   return res.status(status).send(message)
 }
 
