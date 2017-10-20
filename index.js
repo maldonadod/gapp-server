@@ -28,7 +28,12 @@ server.use(bodyParser.json({ extended: true }))
 const morgan = require('morgan')
 server.use(morgan('dev'))
 
+const {
+  CLIENT_IDENTITY
+} = require('./client_identity_middleware')
+
 // APPLY MIDDLEWARES
+server.use(CLIENT_IDENTITY)
 server.use(API_KEY_MIDDLEWARE)
 server.use(EXTRACT_ACCESS_TOKEN)
 server.use(VALIDATE_USER_ID_FROM_REQ)
