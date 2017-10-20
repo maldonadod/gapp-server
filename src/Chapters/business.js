@@ -86,9 +86,14 @@ const post = input => {
 
 const update = ({_id}, input) => Chapter.update({_id}, { $set: input })
 
-const InvitationQuery = ({author}) => ({
-  author: { $ne: author }
-})
+const InvitationQuery = ({user}) => {
+  const query = {
+    guests: {
+      $elemMatch: { user }
+    }
+  }
+  return query
+}
 
 module.exports = {
   get

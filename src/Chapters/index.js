@@ -26,7 +26,7 @@ const getPromise = req => {
 
 const getInvitationPromise = req => {
   const {_id} = getLoggedUserIdFromReq(req)
-  const params = { author: _id }
+  const params = { user: _id }
   return ChapterBusiness.paginate(ChapterBusiness.InvitationQuery(params), getPaginateOptionsFromReq(req))
 }
 

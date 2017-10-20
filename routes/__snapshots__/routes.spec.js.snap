@@ -56,7 +56,14 @@ Array [
       [Function],
     ],
     "method": "get",
-    "path": "/events/:_id?",
+    "path": "/events/:_id",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
+    ],
+    "method": "get",
+    "path": "/events",
   },
   Object {
     "handlers": Array [
