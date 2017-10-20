@@ -16,3 +16,7 @@ const CLIENT_IDENTITY = (req, res, next) => {
   
   next()
 }
+
+module.exports = {
+  CLIENT_IDENTITY
+}
