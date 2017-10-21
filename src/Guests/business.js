@@ -1,7 +1,26 @@
 const User = require('../../models/User')
 const {
+  queryByName
+  ,getPaginate
+} = require('../Users/business')
+const {
   Chapter
 } = require('../../models/Chapter')
+
+const filterGuests = ({_id, name}, paginationOptions) => {
+  
+  const name_query = queryByName(name)
+  
+  const defaultParams = {
+    _id: {
+      $ne: _id
+    }
+  }
+  
+  const params =  Object.assign({}, defaultParams, name_query)
+  
+  return getPaginate(params, paginationOptions)
+}
 
 const update = (_id, guest_id, {status}) => {
   return Chapter.findOne({
@@ -22,4 +41,5 @@ const update = (_id, guest_id, {status}) => {
 
 module.exports = {
   update
+  ,filterGuests
 }
