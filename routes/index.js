@@ -8,6 +8,9 @@ const Places = require('../src/Places')
 const UserProfile = require('../src/UserProfile')
 const HomeHandler = (req, res) => res.send('G ~ OnLine')
 
+const {
+  plugChapterCoverTransformation
+} = require('../upload')
 const UploadMiddleware = require('../upload/middleware')
 
 const {
@@ -63,7 +66,7 @@ const routes = [
   ,{
     method: 'post',
     path: '/events',
-    handlers: [UploadMiddleware(chapterFormatNotification), Chapters.post]
+    handlers: [UploadMiddleware(plugChapterCoverTransformation(chapterFormatNotification)), Chapters.post]
   }
   ,{
     method: 'patch',
