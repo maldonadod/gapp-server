@@ -32,9 +32,11 @@ Object {
 }
 `;
 
-exports[`handlerPromiseFactory handlerPromiseFactory should create a proper handler 1`] = `
+exports[`handlerPromiseFactory handlerPromiseFactory should create a proper handler and return error model of response 1`] = `
 Object {
-  "message": "pepito",
+  "message": Object {
+    "name": "pepito",
+  },
   "status": "ERR",
 }
 `;

@@ -36,4 +36,5 @@ const PromiseHandlerPaginate = promiseHandlerFactory(_digestSuccessPagination, _
 module.exports = {
   PromiseHandler
   ,PromiseHandlerPaginate
+  ,promiseHandlerFactory
 }

@@ -1,7 +1,6 @@
 const {
-  handlerPromiseFactory
+  promiseHandlerFactory
   ,PromiseHandler
-  ,formatAndResponse
   ,PromiseHandlerPaginate
 } = require('./PromiseHandler')
 
@@ -68,25 +67,27 @@ describe('PromiseHandlerPaginate', () => {
   })
 })
 
-describe.skip('handlerPromiseFactory', () => {
+describe('handlerPromiseFactory', () => {
 
-
-  test('handlerPromiseFactory should create a proper handler', () => {
+  test('handlerPromiseFactory should create a proper handler and return error model of response', () => {
 
     const mockedSuccess = jest.fn(data => success(data))
     const mockedError = jest.fn(message => error(message))
+    
     const promise = jest.fn(req => Promise.reject(req.body))
 
     const res = resFactory(output => expect(output).toMatchSnapshot())
 
-    const handleResponseSuccess = formatAndResponse(mockedSuccess)
-    const handleResponseError = formatAndResponse(mockedError)
+    const handleResponseError = res => data => res.send(mockedError(data))
+    const handleResponseSuccess = res => data => res.send(mockedSuccess(data))
 
-    const PromiseHandler = handlerPromiseFactory(handleResponseSuccess, handleResponseError)
+    const PromiseHandler = promiseHandlerFactory(handleResponseSuccess, handleResponseError)
 
     const handler = PromiseHandler(promise)
     const body = {
-      body: 'pepito'
+      body: {
+        name: 'pepito'
+      }
     }
     const req = reqFactory(body)
 
