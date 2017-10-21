@@ -39,9 +39,7 @@ const ChapterSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  cover: {
-    url: String
-  },
+  cover: {},
   messages: [MessageSchema],
   description: String,
   created_at: {
