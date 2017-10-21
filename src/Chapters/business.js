@@ -4,10 +4,8 @@ const {
 
 const User = require('../../models/User')
 
-const chapterFormatNotification = ({secure_url}) => ({
-  cover: {
-    url: secure_url
-  }
+const chapterCoverUploadFormat = cover => ({
+  cover
 })
 
 const author = {
@@ -39,15 +37,7 @@ const message_author = {
 }
 
 const unselected_fields = `
-  -__v -messages 
-  -cover.public_id 
-  -cover.etag 
-  -cover.resource_type 
-  -cover.type 
-  -cover.tags 
-  -cover.signature 
-  -cover.original_filename 
-  -cover.bytes`
+  -__v -messages`
 
 const get = (params = {}) => {
   return Chapter.find(params, unselected_fields)
@@ -101,6 +91,6 @@ module.exports = {
   ,getOne
   ,paginate
   ,update
-  ,chapterFormatNotification
+  ,chapterCoverUploadFormat
   ,InvitationQuery
 }
