@@ -2,6 +2,8 @@ const {
   getLoggedUserIdFromReq
   ,getPaginateOptionsFromReq
   ,getAuthorFromLoggedUser
+  ,getPaginationOptionsFromQueryReq
+  ,getNameFromQueryReq
 } = require('./index')
 
 const loggedInUser = {
@@ -9,6 +11,35 @@ const loggedInUser = {
 }
 
 const reqFactory = data => Object.assign({}, data)
+
+test('should return name from query req', () => {
+  expect.assertions(1)
+  const req = reqFactory({
+    query: {
+      name: 'hola'
+    }
+  })
+  expect(getNameFromQueryReq(req)).toMatchSnapshot()
+})
+
+test('should return pagination options from query req', () => {
+  expect.assertions(1)
+  const req = reqFactory({
+    query: {
+      limit: 2,
+      offset: 4
+    }
+  })
+  expect(getPaginationOptionsFromQueryReq(req)).toMatchSnapshot()
+})
+
+test('should return undefined if loggedInUser doesnt exists', () => {
+  const req = reqFactory({})
+  const {
+    _id
+  } = loggedInUser
+  expect(getLoggedUserIdFromReq(req)).toMatchSnapshot()
+})
 
 test('should return object selector id', () => {
   const req = reqFactory({loggedInUser})

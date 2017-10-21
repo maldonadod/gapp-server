@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should return name from query req 1`] = `
+Object {
+  "name": "hola",
+}
+`;
+
+exports[`should return pagination options from query req 1`] = `
+Object {
+  "paginationOptions": Object {
+    "limit": 2,
+    "offset": 4,
+  },
+}
+`;
+
+exports[`should return undefined if loggedInUser doesnt exists 1`] = `
+Object {
+  "_id": undefined,
+}
+`;
