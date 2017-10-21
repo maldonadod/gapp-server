@@ -14,7 +14,7 @@ const {
 const UploadMiddleware = require('../upload/middleware')
 
 const {
-  chapterFormatNotification
+  chapterCoverUploadFormat
 } = require('../src/Chapters/business')
 
 const routes = [
@@ -66,7 +66,7 @@ const routes = [
   ,{
     method: 'post',
     path: '/events',
-    handlers: [UploadMiddleware(plugChapterCoverTransformation(chapterFormatNotification)), Chapters.post]
+    handlers: [UploadMiddleware(plugChapterCoverTransformation(chapterCoverUploadFormat)), Chapters.post]
   }
   ,{
     method: 'patch',
