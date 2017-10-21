@@ -16,13 +16,13 @@ const getLoggedUserIdFromReq = loggedUserFromReq(id)
 const getAuthorFromLoggedUser = loggedUserFromReq(author)
 const getPaginateOptionsFromReq = queryFromReq(getOptions)
 
-const getPaginationOptionsFromQueryReq = queryFromReq(paginationOptions)
+const getPaginationOptionsFromQueryReq = req => paginationOptions(getPaginateOptionsFromReq(req))
 const getNameFromQueryReq = queryFromReq(name)
 
 module.exports = {
   getLoggedUserIdFromReq
-  ,getPaginateOptionsFromReq
   ,getAuthorFromLoggedUser
   ,getPaginationOptionsFromQueryReq
   ,getNameFromQueryReq
+  ,getPaginateOptionsFromReq
 }
