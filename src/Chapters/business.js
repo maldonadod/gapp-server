@@ -3,7 +3,9 @@ const {
 } = require('../../models/Chapter')
 
 const User = require('../../models/User')
-
+const {
+  plugChapterCoverTransformation
+} = require('../../upload')
 const chapterCoverUploadFormat = cover => ({
   cover
 })
@@ -46,12 +48,24 @@ const get = (params = {}) => {
   .populate(guests)
 }
 
+const justURL = ({url}) => ({url})
+
 const paginate = (params,paginationOptions) => {
   paginationOptions.populate = [
     author, message_author, guests
   ]
   paginationOptions.select = unselected_fields
   return Chapter.paginate(params, paginationOptions)
+  .then(chapters => {
+    
+    chapters.docs = chapters.docs.map(chapter => {
+      chapter.cover = plugChapterCoverTransformation(justURL)(chapter.cover)
+      
+      return chapter
+    })
+    
+    return chapters
+  })
 }
 
 const getOne = (params = {}) => {
