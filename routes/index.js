@@ -7,15 +7,8 @@ const Guests = require('../src/Guests')
 const Places = require('../src/Places')
 const UserProfile = require('../src/UserProfile')
 const HomeHandler = (req, res) => res.send('G ~ OnLine')
-
-const {
-  plugChapterCoverTransformation
-} = require('../upload')
-const UploadMiddleware = require('../upload/middleware')
-
-const {
-  chapterCoverUploadFormat
-} = require('../src/Chapters/business')
+const ChapterFileUpload = require('../upload/chapter_file_upload')
+const UserAvatarFileUpload = require('../upload/user_avatar_upload')
 
 const routes = [
   {
@@ -49,6 +42,11 @@ const routes = [
     handlers: [UserProfile.get]
   }
   ,{
+    method: 'patch',
+    path: '/profile/me',
+    handlers: [UserAvatarFileUpload, UserProfile.update]
+  }
+  ,{
     method: 'get',
     path: '/profile/me/events',
     handlers: [UserProfile.getMyChapters]
@@ -66,7 +64,7 @@ const routes = [
   ,{
     method: 'post',
     path: '/events',
-    handlers: [UploadMiddleware(plugChapterCoverTransformation(chapterCoverUploadFormat)), Chapters.post]
+    handlers: [ChapterFileUpload, Chapters.post]
   }
   ,{
     method: 'patch',
