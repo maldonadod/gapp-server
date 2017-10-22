@@ -27,9 +27,12 @@ const getPaginate = (params,paginationOptions) => {
   return User.paginate(params, paginationOptions)
 }
 
+const update = ({_id}, input) => User.update({_id}, { $set: input })
+
 module.exports = {
   get
   ,findOne
   ,queryByName
   ,getPaginate
+  ,update
 }
