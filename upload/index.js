@@ -15,7 +15,8 @@ const avatarOptions = {
   height: 200,
   crop: 'thumb',
   gravity: 'face',
-  effect: 'saturation:100'
+  effect: 'saturation:100',
+  radius: 'max'
 }
 const chapterCoverOptions = {
   quality: 40,
