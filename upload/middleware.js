@@ -27,8 +27,8 @@ module.exports = format => (req, res, next) => {
     next()
   })
 
-  busboy.on('err',  err => console.log(err))
-  busboy.on('error',  err => console.log(err))
+  busboy.on('err', next)
+  busboy.on('error', next)
 
   busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
     file.on('data', stream.write).on('end', stream.end)
