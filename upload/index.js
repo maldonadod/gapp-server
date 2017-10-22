@@ -1,12 +1,11 @@
 const cloudinary = require('cloudinary')
 
-const applyOptions = options => picture => {
+const transformURL = (options, picture) => {
   const {public_id,format} = picture
   const url = cloudinary.url(`${public_id}.${format}`, options)
   const result = Object.assign({}, picture, {
     url
   })
-  console.log(result)
   return result
 }
 
@@ -23,7 +22,7 @@ const chapterCoverOptions = {
   crop: 'scale',
   width: 600
 }
-const plugFactory = options => formatter => picture => formatter(applyOptions(options)(picture))
+const plugFactory = options => formatter => picture => formatter(transformURL(options, picture))
 
 const plugAvatarTransformation = plugFactory(avatarOptions)
 const plugChapterCoverTransformation = plugFactory(chapterCoverOptions)
