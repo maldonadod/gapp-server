@@ -8,7 +8,7 @@ const {
 } = require('../src/Pagination/business')
 
 const promiseHandlerFactory = (success, error) => getPromise => (req, res) => {
-  return getPromise(req)
+  return getPromise(req, res)
   .then(success(res))
   .catch(error(res))
 }
