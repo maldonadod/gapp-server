@@ -14,7 +14,7 @@ const User = new Schema({
     email: String,
     access_token: String
   },
-  profile_picture: String,
+  profile_picture: {},
   country: {
     type: Schema.Types.ObjectId,
     ref: 'Country'
