@@ -33,6 +33,7 @@
     "node-gcm": "^0.14.6",
     "redux": "^3.7.2",
     "request": "^2.83.0",
-    "request-promise-native": "^1.0.5"
+    "request-promise-native": "^1.0.5",
+    "smsapicom": "^1.5.1"
   }
 }
