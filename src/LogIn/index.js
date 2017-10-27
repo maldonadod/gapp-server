@@ -1,32 +1,30 @@
-const LogInBusiness = require('./business')
+const SignUpBusiness = require('../SignUp/business')
 const UserBusiness = require('../Users/business')
 const {
   PromiseHandler
 } = require('../../responses/PromiseHandler')
 const {
   GetUserToken
-  ,CheckPassword
 } = require('../Auth/middleware')
 
-const getPromise = req => {
-  const {password,email} = req.body
-  return LogInBusiness.login({password,email})
-  .then(GetUserToken)
-  .then(CheckPassword.bind(null, password))
-  .then(user => {
-    return UserBusiness.findOne({
-      _id: user._id
-    })
-    .then(({country}) => {
+const providers = require('../../providers')
+const {
+  getProviderParamsFromReq
+} = require('../../selectors/providers')
 
-      return Object.assign({}, user.toObject(), {
-        country
-      })
-    })
-  })
+const getLoginPromise = req => {
+  
+  const {access_token,provider_name} = getProviderParamsFromReq(req)
+  
+  const provider = providers[provider_name]
+  
+  return provider.me(access_token)
+  .then(SignUpBusiness.register)
+  .then(({_id}) => UserBusiness.findOne({_id}))
+  .then(GetUserToken)
 }
 
-const post = PromiseHandler(getPromise)
+const post = PromiseHandler(getLoginPromise)
 
 module.exports = {
   post
