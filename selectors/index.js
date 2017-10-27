@@ -11,6 +11,7 @@ const name = ({name}) => ({name})
 
 const loggedUserFromReq = getPropertyAndPassToSelect('loggedInUser')
 const queryFromReq = getPropertyAndPassToSelect('query')
+const bodyFromReq = getPropertyAndPassToSelect('body')
 
 const getLoggedUserIdFromReq = loggedUserFromReq(id)
 const getAuthorFromLoggedUser = loggedUserFromReq(author)
@@ -25,4 +26,5 @@ module.exports = {
   ,getPaginationOptionsFromQueryReq
   ,getNameFromQueryReq
   ,getPaginateOptionsFromReq
+  ,bodyFromReq
 }

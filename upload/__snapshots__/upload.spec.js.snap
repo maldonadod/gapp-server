@@ -3,7 +3,7 @@
 exports[`Upload middleware 1`] = `
 Object {
   "cover": Object {
-    "url": "http://localhost/",
+    "secure_url": "http://localhost/",
   },
   "description": "The description",
 }

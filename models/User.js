@@ -6,6 +6,8 @@ const {
 } = require('./Country')
 
 const User = new Schema({
+  facebook_id: String,
+  full_name: String,
   last_name: String,
   first_name: String,
   password: String,
@@ -23,7 +25,7 @@ const User = new Schema({
   collection: 'Users'
 })
 
-User.statics.USER_UNSELECTED_FIELDS = '-__v -authentication.access_token -password'
+User.statics.USER_UNSELECTED_FIELDS = '-__v -authentication.access_token -password -facebook_id'
 User.statics.DEFAULT_COUNTRY_ID = '59d2d92af5229f2947e927cb'
 
 User.plugin(mongoosePaginate)

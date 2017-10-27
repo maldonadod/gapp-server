@@ -47,6 +47,14 @@ Array [
   Object {
     "handlers": Array [
       [Function],
+      [Function],
+    ],
+    "method": "patch",
+    "path": "/profile/me",
+  },
+  Object {
+    "handlers": Array [
+      [Function],
     ],
     "method": "get",
     "path": "/profile/me/events",
