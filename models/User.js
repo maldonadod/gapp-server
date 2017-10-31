@@ -14,6 +14,10 @@ const User = new Schema({
   authentication: {
     regid: String,
     email: String,
+    provider_name: {
+      type: String,
+      default: 'facebook'
+    },
     access_token: String
   },
   profile_picture: {},
