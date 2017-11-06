@@ -13,7 +13,9 @@ const Hash = chunk => {
   return bcrypt.hash(chunk, saltRounds)
 }
 
-const UserToken = payload => jwt.sign(payload, AUTH_TOKEN_SAUCE)
+const UserToken = payload => jwt.sign(payload, AUTH_TOKEN_SAUCE, {
+  expiresIn: '1y'
+})
 
 module.exports = {
   UserToken
