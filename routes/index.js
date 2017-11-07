@@ -4,6 +4,7 @@ const Login = require('../src/LogIn')
 const Chapters = require('../src/Chapters')
 const Users = require('../src/Users')
 const Guests = require('../src/Guests')
+const Contacts = require('../src/Contacts/Contacts')
 const Places = require('../src/Places')
 const UserProfile = require('../src/UserProfile')
 const HomeHandler = (req, res) => res.send('G ~ OnLine')
@@ -73,8 +74,8 @@ const routes = [
   }
   ,{
     method: 'get',
-    path: '/users',
-    handlers: [Guests.get]
+    path: '/contacts',
+    handlers: [Contacts.get]
   }
   ,{
     method: 'get',
