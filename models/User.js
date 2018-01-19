@@ -4,6 +4,9 @@ const mongoosePaginate = require('mongoose-paginate')
 const {
   Country
 } = require('./Country')
+const {
+  ContactSchema
+} = require('./Contact')
 
 const User = new Schema({
   facebook_id: String,
@@ -18,8 +21,10 @@ const User = new Schema({
       type: String,
       default: 'facebook'
     },
+    provider_access_token: String,
     access_token: String
   },
+  contacts: [ContactSchema],
   profile_picture: {},
   country: {
     type: Schema.Types.ObjectId,

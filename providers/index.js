@@ -1,4 +1,11 @@
 const fb = require('./fb');
+
+const providers = {
+	facebook: fb
+}
+
 module.exports = {
-  'Facebook': fb
+	select(key) {
+		return providers[key]
+	}
 }

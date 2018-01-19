@@ -1,14 +1,16 @@
 const User = require('../../models/User')
 const UserBusiness = require('../Users/business')
 
-const register = ({
-  facebook_id
-  ,first_name
-  ,last_name
-  ,full_name
-  ,profile_picture
-  ,regid = ""
-}) => {
+const register = (profile) => {
+  const {
+    facebook_id
+    ,first_name
+    ,last_name
+    ,full_name
+    ,profile_picture
+    ,provider_access_token
+    ,regid = ""
+  } = profile
 
   return User.findOne({
     facebook_id
@@ -25,6 +27,7 @@ const register = ({
         profile_picture,
         authentication: {
           regid,
+          provider_access_token,
           access_token: null
         }
       }

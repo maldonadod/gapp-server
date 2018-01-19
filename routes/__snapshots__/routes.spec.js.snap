@@ -93,7 +93,7 @@ Array [
       [Function],
     ],
     "method": "get",
-    "path": "/users",
+    "path": "/contacts",
   },
   Object {
     "handlers": Array [
