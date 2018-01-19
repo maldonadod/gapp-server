@@ -23,7 +23,7 @@ const me = access_token => {
   })
 }
 
-function get_friends(url = '/me/friends', options) {
+function contacts(url = '/me/friends', options) {
   
   graph.get(url, options, function(err, res) {
     res.data.map(friend => console.log(friend.name, friend.id))
@@ -37,5 +37,6 @@ function get_friends(url = '/me/friends', options) {
 }
 
 module.exports = {
-  me
+  me,
+  contacts
 }
