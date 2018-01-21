@@ -6,6 +6,7 @@ const {
 const {
   GetUserToken
 } = require('../Auth/middleware')
+const Provider = require('../../providers/Provider');
 
 const providers = require('../../providers')
 const {
@@ -16,7 +17,7 @@ const getLoginPromise = req => {
   
   const {access_token,provider_name} = getProviderParamsFromReq(req)
   
-  const provider = providers[provider_name]
+  const provider = Provider.for(provider_name.toLowerCase())
   
   return provider.me(access_token)
   .then(SignUpBusiness.register)
