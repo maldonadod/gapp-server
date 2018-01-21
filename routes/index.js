@@ -74,7 +74,7 @@ const routes = [
   }
   ,{
     method: 'get',
-    path: '/contacts',
+    path: '/profile/me/contacts',
     handlers: [Contacts.get]
   }
   ,{
