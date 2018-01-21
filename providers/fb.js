@@ -1,5 +1,9 @@
 const graph = require('fbgraph')
 
+const access_token = (access_token) => {
+  graph.setAccessToken(access_token)
+}
+
 const me = access_token => {
   graph.setAccessToken(access_token)
   return new Promise((resolve, reject) => {
@@ -23,20 +27,13 @@ const me = access_token => {
   })
 }
 
-function contacts(url = '/me/friends', options) {
+function contacts(options, cb) {
   
-  graph.get(url, options, function(err, res) {
-    res.data.map(friend => console.log(friend.name, friend.id))
-    
-    if (err) { return console.log(err) }
-    
-    if (res.paging.next) {
-      get_friends(res.paging.next)
-    }
-  })
+  graph.get('/me/friends', cb)
 }
 
 module.exports = {
   me,
-  contacts
+  contacts,
+  access_token
 }
