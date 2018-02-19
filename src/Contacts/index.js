@@ -17,14 +17,20 @@ const getContacts = (req) => {
     return User.findOne({_id})
     .then(user => {
 
+        //@smells demeter law
         Provider
         .for(user.authentication.provider_name)
-        .access_token('EAAMon5zuVZAQBAPUR07mcsDmnRtqeZBDRQsUJZAvWqe4XR3d1xq9rrcapSp21AHkCbFU2L393ZAZCesnh3iPZCQVJSJXMoQpaXqTQgK3ILVi6kQDY3fz9dGF5S4922EftbWOElK70Bk8RA7aMFeZBZA5whsQaYNYKE8me8kNzb3sABmfzOfiDC6tWnbnmoq8SWxuSL0r1yyBxnmM3AhNNLuZCRpEvFey5M3l3CDivwZCAKXAZDZD');
+        .access_token(user.authentication.provider_access_token);
 
-        return Provider
-        .for(user.authentication.provider_name)
-        .contacts({}, function(err, contacts) {
-            console.log(err, contacts)
+        return new Promise((resolve, reject) => {
+            Provider
+            .for(user.authentication.provider_name)
+            .contacts({}, function(err, contacts) {
+                if (err) {
+                    return reject(err)
+                }
+                return resolve(contacts.data)
+            })
         })
     })
 }
