@@ -20,7 +20,12 @@ const getLoginPromise = req => {
   const provider = Provider.for(provider_name.toLowerCase())
   
   return provider.me(access_token)
-  .then(SignUpBusiness.register)
+  .then((profile) => {
+
+    profile.provider_access_token = access_token
+
+    return SignUpBusiness.register(profile)
+  })
   .then(({_id}) => UserBusiness.findOne({_id}))
   .then(GetUserToken)
 }
