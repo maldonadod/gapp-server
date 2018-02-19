@@ -33,6 +33,9 @@ const register = (profile) => {
       }
 
       return new User(user).save()
+    } else {
+      exists.authentication.provider_access_token = provider_access_token
+      exists.save().then()
     }
     return exists
   })
