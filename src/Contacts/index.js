@@ -12,7 +12,14 @@ const User = require('../../models/User');
 
 const getContacts = (req) => {
 
-    return User.find({}).then(x => x);
+    return User.find({}).then(x => ({
+        results: x,
+		paging: {
+			limit: 2,
+			total: 30,
+			offset: 2
+		}
+    }));
 }
 
 const get = PromiseHandler(getContacts);
