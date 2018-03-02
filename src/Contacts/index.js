@@ -12,27 +12,7 @@ const User = require('../../models/User');
 
 const getContacts = (req) => {
 
-    const {_id} = getLoggedUserIdFromReq(req)
-    
-    return User.findOne({_id})
-    .then(user => {
-
-        //@smells demeter law
-        Provider
-        .for(user.authentication.provider_name)
-        .access_token(user.authentication.provider_access_token);
-
-        return new Promise((resolve, reject) => {
-            Provider
-            .for(user.authentication.provider_name)
-            .contacts({}, function(err, contacts) {
-                if (err) {
-                    return reject(err)
-                }
-                return resolve(contacts.data)
-            })
-        })
-    })
+    return User.find({}).then(x => x);
 }
 
 const get = PromiseHandler(getContacts);
