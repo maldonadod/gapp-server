@@ -8,11 +8,11 @@ const {
     getLoggedUserIdFromReq
 } = require('../../selectors/index');
 
-const User = require('../../models/User');
+const UserBusiness = require('../Users/business');
 
 const getContacts = (req) => {
 
-    return User.find({}).then(x => ({
+    return UserBusiness.get({}).then(x => ({
         results: x,
 		paging: {
 			limit: 2,
