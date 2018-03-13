@@ -32,6 +32,11 @@ const {
   CLIENT_IDENTITY
 } = require('./client_identity_middleware')
 
+server.get('/privacy/index.html', (req, res) => {
+
+  return res.sendFile(__dirname + '/routes/index.html');
+})
+
 // APPLY MIDDLEWARES
 server.use(CLIENT_IDENTITY)
 server.use(API_KEY_MIDDLEWARE)
